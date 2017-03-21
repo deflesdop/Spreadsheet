@@ -3,6 +3,7 @@
 *.project
 
 *~
+*.exe
 
 # Compiled Object files
 *.slo
