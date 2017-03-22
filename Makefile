@@ -1,18 +1,33 @@
 CXX = g++ 
-CFLAGS =	-O2 -g -std=c++14 -Wall -fmessage-length=0
-CCFILE =	main.cpp
-OBJS =		main.o
-BIN = bin
-LIBS =
+CFLAGS =	-std=c++14 -Wall -g -Wextra -pedantic 
+OBJDIR = bin
+OBJS =	$(addprefix $(OBJDIR)/, $(patsubst $(SRC)/%.cpp, %.o, $(wildcard $(SRC)/*.cpp)))
+INC = include
 SRC = src
 TARGET =	main
 
-all:	$(TARGET)
-    
-$(TARGET):	$(BIN)/$(OBJS)
-	$(CXX) $(CFLAGS) -o $@ $(BIN)/$(OBJS)
+.PHONY: all clean
+
+all:	$(OBJDIR) $(TARGET)
+	@echo Done Building...
+
+$(OBJDIR):
+	@echo Making bin directory
+	@mkdir $(OBJDIR)
+
+$(OBJDIR)/%.o:	$(SRC)/%.cpp
+	@echo Building $@
+	@$(CXX) $(CFLAGS) -c $< -o $@	
+	@echo Done Building $@
 	
-$(BIN)/$(OBJS): $(SRC)/$(CCFILE)
-	$(CXX) $(CFLAGS) -c -o $@ $<
+    
+$(TARGET):	$(OBJS)
+	@echo Building executable $@
+	@$(CXX) $(CFLAGS) -I$(INC) -o $@ $^
+	
+
 clean:
-	rm -f $(OBJS) $(TARGET)
+	@echo Cleaning $(OBJDIR) $(TARGET) $(wildcard *.o)...
+	@rm -f $(TARGET) $(wildcard *.o)
+	@rm -rf $(OBJDIR)
+	@echo Done Cleaning...

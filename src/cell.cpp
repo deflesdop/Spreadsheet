@@ -2,19 +2,26 @@
 #include "../include/cell.h" 
 
 using namespace std;
-template <typename T>
-Cell::Cell(){
+
+template<typename T>
+Cell<T>::Cell(){
  value = nullptr;
-};
+}
 
-void Cell::setValue(const T value){
 
-};
+template <typename T>
+void Cell<T>::setValue(const T value){
 
-T Cell::readValue(){
+}
 
-};
 
-void Cell::emptyCell(){
+template <typename T>
+T Cell<T>::readValue(){
 
-};
+}
+
+
+template <typename T>
+void Cell<T>::emptyCell(){
+
+}

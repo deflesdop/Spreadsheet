@@ -1,6 +1,7 @@
 #include <string>
 #include <sstream>
 using namespace std;
+
 template<typename T>
 class CellValue final : public CellValueBase
 {
@@ -18,9 +19,11 @@ class CellValue final : public CellValueBase
 	~CellValueBase(){
 	
 	}
-	void setValue(T value){
-		this.value = value; 
+
+	void setValue(T val){
+		value = val;
 	}
+
 	T getValue(){
 		return value;
 	}
@@ -32,11 +35,12 @@ class CellValue final : public CellValueBase
 	}
 	
 	string returnValueEdit(){
-		return typeid(T).name();
+		//typeid(T).name()
+		return "FALSE";
 	}
 	
 	float returnValue(){
 		return (float)value;
 	}
 	
-}	
+};
