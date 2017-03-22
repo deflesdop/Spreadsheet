@@ -2,6 +2,7 @@
 *.cproject
 *.project
 
+main
 *~
 *.exe
 
