@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/cell.h" 
+#include <memory>
 
 using namespace std;
 
@@ -8,9 +9,14 @@ Cell<T>::Cell(){
  value = nullptr;
 }
 
+template<typename T>
+unique_ptr<CellValueBase> Cell<T>::getValue(){
+	return value;
+}
+
 
 template <typename T>
-void Cell<T>::setValue(const T value){
+void Cell<T>::setValue(const T val){
 
 }
 

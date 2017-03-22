@@ -9,6 +9,7 @@ class Cell {
 
 	public:
 		Cell();
+		unique_ptr<CellValueBase>getValue();
 		void setValue(const T value);
 		T readValue();
 		void emptyCell();
