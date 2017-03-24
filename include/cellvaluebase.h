@@ -10,8 +10,7 @@ class CellValueBase {
 
 		CellValueBase();
 
-		virtual ~CellValueBase(){
-
+		virtual ~CellValueBase(void){
 		}
 
 		virtual string returnInfo(){
@@ -22,9 +21,14 @@ class CellValueBase {
 			return "WRONG";
 		}
 
-		virtual float returnValue(){
-			return -9.6;
+		virtual float returnFValue(){
+			return 9.6;
 		}
+
+		virtual void print() const
+		    {
+		      cout << "CellValueBase!" << endl;
+		    }
 
 
 	private:

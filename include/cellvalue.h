@@ -1,3 +1,6 @@
+#ifndef CELLVALUE_H_
+#define CELLVALUE_H_
+
 #include <string>
 #include <sstream>
 using namespace std;
@@ -11,36 +14,31 @@ class CellValue final : public CellValueBase
 	public:
 	CellValue(T initial_value)
 		:CellValueBase(), value(initial_value)
-	{
+	{}
 	
-	
-	}
-	
-	~CellValueBase(){
-	
-	}
+	virtual ~CellValue(){
 
-	void setValue(T val){
-		value = val;
-	}
-
-	T getValue(){
-		return value;
 	}
 	
-	string returnInfo(){
-		ostringstream os;
+	virtual string returnInfo(){
+		stringstream os;
 		os << value << endl;
 		return os.str();
 	}
 	
-	string returnValueEdit(){
-		//typeid(T).name()
-		return "FALSE";
+	virtual string returnValueEdit(){
+		return "";
 	}
 	
-	float returnValue(){
-		return (float)value;
+	virtual float returnFValue(){
+		return value;
 	}
-	
+
+	virtual void print() const
+		    {
+		      cout << "Cellvalue!" << endl;
+		    }
+
 };
+
+#endif
