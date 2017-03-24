@@ -30,7 +30,7 @@ class CellValue final : public CellValueBase
 		return "";
 	}
 	
-	virtual float returnFValue(){
+	virtual float returnFloatValue(){
 		return value;
 	}
 

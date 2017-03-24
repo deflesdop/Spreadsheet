@@ -21,7 +21,7 @@ class CellValueBase {
 			return "WRONG";
 		}
 
-		virtual float returnFValue(){
+		virtual float returnFloatValue(){
 			return 9.6;
 		}
 

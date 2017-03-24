@@ -10,11 +10,27 @@ template <typename T>
 class Cell {
 
 	public:
+
+		Cell(Cell const &) = delete;
+		Cell &operator=(Cell const &) = delete;
+
 		Cell(){
 		 value = nullptr;
 		}
 		
+		~Cell(){
+
+		}
+
+		Cell &operator=(Cell const &&o){
+			if (this != &o){
+				value = std::move(o.value);
+			}
+			return *this;
+		}
+
 		void setValue(const T val){
+
 			value.reset(new CellValue<T>(val));
 		}
 
@@ -27,8 +43,9 @@ class Cell {
 				return value->returnValueEdit();
 			}
 
-		T readFValue(){
-				return value->returnFValue();
+
+		T readFloatValue(){
+				return value->returnFloatValue();
 			}
 
 		void emptyCell(){

@@ -22,16 +22,13 @@ class Column {
 	const int maxNumberCells = 24;
 	vector<Cell<T>> column;
 
-	vector<Cell<T>>::iterator begin(){
-		return column.begin();
-	}
-
-	vector<Cell<T>>::iterator end(){
-			return column.end();
-		}
-
 	public:
 
+	/*Constructor for the columns
+	 *
+	 ****************************
+	 * Not working due to unique_ptr being copied somewhere
+	 */
 	Column(void){
 		column.resize(maxNumberCells);
 
@@ -41,13 +38,13 @@ class Column {
 		}
 	}
 
+	~Column(void) = default;
+
 	Cell<T>* getCell(const int row){
-		for(vector<Cell<T>>::iterator it = begin(); it != end(); ++it){
-
-		}
-
+		Cell<T>* temp;
+		temp = column[row];
+		return temp;
 	}
-
 
 
 
