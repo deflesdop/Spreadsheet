@@ -1,9 +1,6 @@
 //============================================================================
-// Name        : SpreadSheet.cpperror
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C, Ansi-style
+// Name        : Andrew Huang, Micha de Jong
+// Description : Spreadsheet
 //============================================================================
 #include "../include/cell.h"
 #include "../include/column.h"
