@@ -53,7 +53,7 @@ class CellValue final : public CellValueBase
 	 * values.
 	 */
 	virtual string returnValueEdit(){
-		return "";
+		return " " ;
 	}
 	
 	/*
@@ -64,7 +64,7 @@ class CellValue final : public CellValueBase
 	 * TODO Fix conversion error.
 	 */
 	virtual float returnFloatValue(){
-		return value;
+		return 1.0f ;
 	}
 
 	/*

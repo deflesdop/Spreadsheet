@@ -3,7 +3,7 @@
 // Description : Spreadsheet
 //============================================================================
 #include "../include/cell.h"
-#include "../include/column.h"
+//#include "../include/column.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -11,8 +11,13 @@ using namespace std;
 
 int main(void) {
 
-	Cell<float> cell;
-	cell.setValue(91.399);
+	Cell cell;
+	cell.setFloatValue(91.399);
 	cout << cell.readFloatValue() << endl;
+	
+	Cell cell2;
+	cell2.setStringValue("Hello");
+	cout << cell2.readStrValueDraw() << endl;
+	
 	return 0;
 }

@@ -19,7 +19,6 @@ using namespace std;
  * list to form a column.
  */
 
-template <typename T>
 class Column {
 
 
@@ -33,7 +32,7 @@ class Column {
 	/*
 	 * Vector list of Cells.
 	 */
-	vector<Cell<T>> column;
+	vector<Cell> column;
 
 	public:
 
@@ -43,26 +42,24 @@ class Column {
 	 * Not working due to unique_ptr being copied somewhere
 	 * TODO Fix call to copyconstructor
 	 */
-	Column(void){
-		column.resize(maxNumberCells);
+//	Column(void){
+//		column.resize(maxNumberCells);
 
-		for(int i = 0; i < maxNumberCells; i++){
-			Cell<T> cell;
-			column.push_back(cell);
-		}
-	}
+//		for(int i = 0; i < maxNumberCells; i++){
+//			Cell cell;
+//			column.push_back(cell);
+//		}
+//	}
 
-	~Column(void) = default;
+//	~Column(void) = default;
 
 	/*
 	 * Returns the Cell pointer at a certain row.
 	 * PARAMS int row, row of the column.
 	 */
-	Cell<T>* getCell(const int row){
-		Cell<T>* temp;
-		temp = column[row];
-		return temp;
-	}
+//	Cell* getCell(const int row){
+//		return column[row];
+//	}
 
 };
 

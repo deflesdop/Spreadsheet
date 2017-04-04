@@ -12,7 +12,6 @@
  * The value is stored in CellValue and is accessible through a unique pointer.
  */
 
-template <typename T>
 class Cell {
 
 	private:
@@ -24,71 +23,49 @@ class Cell {
 
 	public:
 
-
-		Cell(Cell const &) = delete;
-		Cell &operator=(Cell const &) = delete;
-
 		/*
 		 * Cell constructor.
 		 */
-		Cell(){
-		 value = nullptr;
-		}
+		Cell();
 		
 		/*
 		 * Cell destructor.
 		 */
-		~Cell(){
-
-		}
-
-		/*
-		 * = overload for assigning pointers.
-		 */
-		Cell &operator=(Cell const &&o){
-			if (this != &o){
-				value = std::move(o.value);
-			}
-			return *this;
-		}
+		~Cell();
 
 		/*
 		 *Stores a new value in a cell.
-		 *PARAMS T type, value to store.
+		 *PARAMS float type, value to store.
 		 */
-		void setValue(const T val){
-			value.reset(new CellValue<T>(val));
-		}
+		void setFloatValue(const float val);
 
+		/*
+		 *Stores a new value in a cell.
+		 *PARAMS string type, value to store.
+		 */
+		void setStringValue(const string val);
+		
 		/*
 		 *Returns the string of the cell used for drawing
 		 *the spreadsheet.
 		 */
-		T readStrValueDraw(){
-			return value->returnInfo();
-		}
+		string readStrValueDraw();
 
 		/*
 		 * Returns the string of the cell used for editing
 		 * values.
 		 */
-		T readStrValueEdit(){
-				return value->returnValueEdit();
-		}
+		string readStrValueEdit();
 
 		/*
 		 * Returns the value of the cell as float.
 		 */
-		T readFloatValue(){
-				return value->returnFloatValue();
-		}
+		float readFloatValue();
 
 		/*
 		 * Clears the value of the cell.
 		 */
-		void emptyCell(){
-			value.reset(nullptr);
-		}
+		void emptyCell();
 
 
 };
