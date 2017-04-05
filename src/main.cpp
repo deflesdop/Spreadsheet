@@ -10,14 +10,14 @@ using namespace std;
 
 
 int main(void) {
+	cout << "test" << endl;
 
 	Cell cell;
 	cell.setFloatValue(91.399);
 	cout << cell.readFloatValue() << endl;
-	
-	Cell cell2;
-	cell2.setStringValue("Hello");
-	cout << cell2.readStrValueDraw() << endl;
-	
+
+	CellValue<string> test("test");
+
+	cout << test.returnFloatValue() << endl;
 	return 0;
 }

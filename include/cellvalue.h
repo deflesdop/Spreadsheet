@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include "cellvaluebase.h"
 using namespace std;
 
 /*
@@ -12,7 +13,7 @@ using namespace std;
  */
 
 template<typename T>
-class CellValue final : public CellValueBase
+class CellValue : public CellValueBase
 {
 	private: 
 		/*
@@ -28,33 +29,19 @@ class CellValue final : public CellValueBase
 	 * PARAMS T type, value in the cell.
 	 */
 	CellValue(T initial_value)
-		:CellValueBase(), value(initial_value)
+		:value(initial_value)
 	{}
-	
-	/*
-	 * CellValue Destructor.
-	 */
-	virtual ~CellValue(){
-
-	}
 	
 	/*
 	 *Returns the string of the cell used for drawing
 	 *the spreadsheet.
 	 */
-	virtual string returnInfo(){
+	string returnInfo(){
 		stringstream os;
 		os << value << endl;
 		return os.str();
 	}
 
-	/*
-	 * Returns the string of the cell used for editing
-	 * values.
-	 */
-	virtual string returnValueEdit(){
-		return " " ;
-	}
 	
 	/*
 	 * Returns the value of the cell as float.
@@ -63,18 +50,13 @@ class CellValue final : public CellValueBase
 	 * causing an conversion error.
 	 * TODO Fix conversion error.
 	 */
-	virtual float returnFloatValue(){
-		return 1.0f ;
+	float returnFloatValue(){
+		return 0.f;
 	}
 
-	/*
-	 * Print function used for testing.
-	 */
-	virtual void print() const
-		    {
-		      cout << "Cellvalue!" << endl;
-		    }
-
 };
+
+
+
 
 #endif

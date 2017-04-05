@@ -44,17 +44,10 @@ using namespace std;
 	}
 
 	/*
-	 * Returns the string of the cell used for editing
-	 * values.
-	 */
-	string Cell::readStrValueEdit(){
-			return value->returnValueEdit();
-	}
-	/*
 	 * Returns the value of the cell as float.
 	 */
 	float Cell::readFloatValue(){
-			return value->returnFloatValue();
+		return value->returnFloatValue();
 	}
 
 	/*

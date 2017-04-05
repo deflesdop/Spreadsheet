@@ -16,39 +16,19 @@ class CellValueBase {
 
 		CellValueBase();
 
-		virtual ~CellValueBase(void){
-		}
+		virtual ~CellValueBase(void) = default;
 
 		/*
 		 *Returns the string of the cell used for drawing
 		 *the spreadsheet.
 		 */
-		virtual string returnInfo(){
-			return "WRONG";
-		}
+		virtual string returnInfo() = 0;
 
-		/*
-		 * Returns the string of the cell used for editing
-		 * values.
-		 */
-		virtual string returnValueEdit(){
-			return "WRONG";
-		}
 
 		/*
 		 * Returns the value of the cell as float.
 		 */
-		virtual float returnFloatValue(){
-			return 9.6;
-		}
-
-		/*
-		 * Print function used for testing.
-		 */
-		virtual void print() const
-		    {
-		      cout << "CellValueBase!" << endl;
-		    }
+		virtual float returnFloatValue() = 0;
 
 };
 #endif

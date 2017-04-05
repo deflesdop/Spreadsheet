@@ -8,7 +8,7 @@ TARGET =	main
 
 .PHONY: all clean
 
-all:	$(OBJDIR) $(TARGET)
+all: clean $(OBJDIR) $(TARGET)
 	@echo Done Building...
 
 $(OBJDIR):

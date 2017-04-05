@@ -52,12 +52,6 @@ class Cell {
 		string readStrValueDraw();
 
 		/*
-		 * Returns the string of the cell used for editing
-		 * values.
-		 */
-		string readStrValueEdit();
-
-		/*
 		 * Returns the value of the cell as float.
 		 */
 		float readFloatValue();
