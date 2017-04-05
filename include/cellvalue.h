@@ -38,7 +38,7 @@ class CellValue : public CellValueBase
 	 */
 	string returnInfo(){
 		stringstream os;
-		os << value << endl;
+		os << value;
 		return os.str();
 	}
 

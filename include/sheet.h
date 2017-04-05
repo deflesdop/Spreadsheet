@@ -17,7 +17,6 @@
  *to form a spreadsheet.
  */
 
-template <typename T>
 class Sheet{
 
 	private:
@@ -25,12 +24,12 @@ class Sheet{
 	/*
 	 * Vector list to store columns.
 	 */
-	std::vector<Column<Cell<T>>> sheet;
+	std::vector<Column> sheet;
 
 	/*
 	 * Number of columns in the spreadsheet.
 	 */
-	const int columns = 80;
+	const int maxColumnNumber = 80;
 
 	public:
 
@@ -40,11 +39,9 @@ class Sheet{
 	 * Not working due to unique_ptr being copied somewhere
 	 * TODO Fix call to copyconstructor
 	 */
-	Sheet(){
-		sheet.resize(80);
-	}
+	Sheet();
 
-	~Sheet();
+	~Sheet() = default;
 
 
 	/*
@@ -54,9 +51,7 @@ class Sheet{
 	 * *********
 	 * TODO Not yet implemented.
 	 */
-	Cell<T>* getCell(const int row, const int column){
-
-	}
+	Cell* getCell(const int row, const int column);
 
 
 };
