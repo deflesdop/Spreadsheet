@@ -10,23 +10,42 @@
 using namespace std;
 
 
-int main(void) {
+void cellTest(){
 	cout << "test" << endl;
 
-	Cell cell;
-	cell.setFloatValue(91.399);
-	cout << cell.readFloatValue() << endl;
+		Cell cell;
+		cell.setFloatValue(91.399);
+		cout << cell.readFloatValue() << endl;
 
-	CellValue<string> test("test");
-	cout << test.returnInfo() << endl;
-	cout << test.returnFloatValue() << endl;
+		CellValue<string> test("test");
+		cout << test.returnInfo() << endl;
+		cout << test.returnFloatValue() << endl;
 
-	Column col;
-	col.getCell(2).setStringValue("This is a cell from column");
-	cout << col.getCell(2).readStrValueDraw() << endl;
+		Column col;
+		col.getCell(2).setStringValue("This is a cell from column");
+		cout << col.getCell(2).readStrValueDraw() << endl;
 
-	Sheet sheet;
-	sheet.getCell(2,2).setStringValue("This is 2,2 from the sheet");
-	cout << sheet.getCell(2,2).readStrValueDraw() << endl;
+		Sheet sheet;
+		sheet.getCell(2,2).setStringValue("This is 2,2 from the sheet");
+		cout << sheet.getCell(2,2).readStrValueDraw() << endl;
+
+		for (Column::iterator it = col.begin(); it != col.end(); ++it){
+			it->setStringValue("HELLO");
+			cout << it->readStrValueDraw() << endl;
+		}
+		cout << endl;
+		int c;
+
+		for(Sheet::iterator it = sheet.begin(); it != sheet.end(); ++it){
+			it->getCell(2).setStringValue("sh");
+			c++;
+			cout << it->getCell(2).readStrValueDraw() << endl;
+		}
+		cout << c << endl;
+
+}
+
+int main(void) {
+
 	return 0;
 }

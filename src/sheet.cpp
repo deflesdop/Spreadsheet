@@ -10,12 +10,28 @@
 
 Sheet::Sheet():
 sheet(maxColumnNumber)
-{
-}
+{}
 
+
+Column& Sheet::getColumn(int column){
+	return sheet[column];
+}
 
 Cell& Sheet::getCell(int row, int column){
-	return sheet[column].getCell(row);
+	return getColumn(column).getCell(row);
 }
 
+/*
+*
+*/
+SheetIterator Sheet::begin(void){
+	return SheetIterator(*this,0);
+}
+
+/*
+*
+*/
+SheetIterator Sheet::end(void){
+	return SheetIterator(*this, sheet.size());
+}
 
