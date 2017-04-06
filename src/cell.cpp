@@ -8,16 +8,16 @@ using namespace std;
 	/*
 	 * Cell constructor.
 	 */
-	Cell::Cell(){
-	 value = nullptr;
-	}
+	Cell::Cell():
+	 value(nullptr)
+	{}
 		
-	/*
-	 * Cell destructor.
-	 */
-	Cell::~Cell(){
-
-	}
+//	/*
+//	 * Cell destructor.
+//	 */
+//	Cell::~Cell(){
+//
+//	}
 
 	/*
 	 *Stores a new value in a cell.

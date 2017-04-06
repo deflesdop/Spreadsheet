@@ -8,16 +8,13 @@
 #include "../include/cell.h"
 
 
-Column::Column(){
-	for(int i = 0; i < maxNumberCells; i++){
-		Cell* temp = new Cell() ;
-		column.push_back(temp);
-	}
-}
+Column::Column():
+column(maxNumberCells)
+{}
 
 
 
-Cell* Column::getCell(const int row){
+Cell& Column::getCell(const int row){
 	return column[row];
 }
 

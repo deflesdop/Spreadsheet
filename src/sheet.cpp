@@ -8,15 +8,13 @@
 #include "../include/column.h"
 
 
-Sheet::Sheet(){
-	for(int i = 0; i < maxColumnNumber; i++){
-		Column col;
-		sheet.push_back(col);
-	}
+Sheet::Sheet():
+sheet(maxColumnNumber)
+{
 }
 
 
-Cell* Sheet::getCell(int row, int column){
+Cell& Sheet::getCell(int row, int column){
 	return sheet[column].getCell(row);
 }
 

@@ -6,6 +6,7 @@
 #include "../include/cellvaluebase.h"
 #include "../include/cellvalue.h"
 
+
 /*
  * Header file for the Cell class.
  * This object stores a template object.
@@ -31,7 +32,7 @@ class Cell {
 		/*
 		 * Cell destructor.
 		 */
-		~Cell();
+		~Cell() = default;
 
 		/*
 		 *Stores a new value in a cell.
@@ -43,13 +44,13 @@ class Cell {
 		 *Stores a new value in a cell.
 		 *PARAMS string type, value to store.
 		 */
-		void setStringValue(const string val);
+		void setStringValue(const std::string val);
 		
 		/*
 		 *Returns the string of the cell used for drawing
 		 *the spreadsheet.
 		 */
-		string readStrValueDraw();
+		std::string readStrValueDraw();
 
 		/*
 		 * Returns the value of the cell as float.

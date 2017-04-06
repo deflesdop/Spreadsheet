@@ -22,11 +22,11 @@ int main(void) {
 	cout << test.returnFloatValue() << endl;
 
 	Column col;
-	col.getCell(2)->setStringValue("This is a cell from column");
-	cout << col.getCell(2)->readStrValueDraw() << endl;
+	col.getCell(2).setStringValue("This is a cell from column");
+	cout << col.getCell(2).readStrValueDraw() << endl;
 
 	Sheet sheet;
-	sheet.getCell(2,2)->setStringValue("This is 2,2 from the sheet");
-	cout << sheet.getCell(2,2)->readStrValueDraw() << endl;
+	sheet.getCell(2,2).setStringValue("This is 2,2 from the sheet");
+	cout << sheet.getCell(2,2).readStrValueDraw() << endl;
 	return 0;
 }

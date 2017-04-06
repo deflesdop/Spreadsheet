@@ -28,20 +28,16 @@ class Column {
 	/*
 	 * Number of rows in the spreadsheet.
 	 */
-	const int maxNumberCells = 24;
+	const static int maxNumberCells = 24;
 
 	/*
 	 * Vector list of Cells.
 	 */
-	vector<Cell*> column;
+	vector<Cell> column;
 
 	public:
 
 	/*Constructor for the columns
-	 *
-	 ****************************
-	 * Not working due to unique_ptr being copied somewhere
-	 * TODO Fix call to copyconstructor
 	 */
 	Column(void);
 
@@ -52,7 +48,7 @@ class Column {
 //	 * Returns the Cell pointer at a certain row.
 	 * PARAMS int row, row of the column.
 	 */
-	Cell* getCell(const int row);
+	Cell& getCell(const int row);
 
 	typedef ColIterator iterator;
 
@@ -90,14 +86,14 @@ class ColIterator : public std::iterator<std::input_iterator_tag, int>
 		      return !operator==(iter);
 		    }
 
-		Cell* &operator*() const
+		Cell &operator*() const
 		    {
-		     // return col.getCell(offset);
+		     return col.getCell(offset);
 		    }
 
-		Cell* *operator->() const
+		Cell *operator->() const
 		    {
-		     // return &col.getCell(offset);
+		     return &col.getCell(offset);
 		    }
 
 		ColIterator &operator++()

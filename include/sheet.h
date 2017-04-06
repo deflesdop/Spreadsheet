@@ -29,7 +29,7 @@ class Sheet{
 	/*
 	 * Number of columns in the spreadsheet.
 	 */
-	const int maxColumnNumber = 80;
+	const static int maxColumnNumber = 80;
 
 	public:
 
@@ -51,7 +51,7 @@ class Sheet{
 	 * *********
 	 * TODO Not yet implemented.
 	 */
-	Cell* getCell(const int row, const int column);
+	Cell& getCell(const int row, const int column);
 
 
 };
