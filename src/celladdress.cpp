@@ -8,9 +8,8 @@
 #include <string>
 
 
-CellAddress::CellAddress():
-	rowNum(0), colNum(0)
-{}
+CellAddress::CellAddress()
+{rowNum = 0, colNum = 0;}
 
 
 CellAddress::CellAddress(std::string &ref){
@@ -27,8 +26,38 @@ void CellAddress::createFromReference(std::string &ref){
 			s1 += c;
 		}
 	}
-	rowNum = stoi(s2);
-	colNum = convertColNameToColNum(s1);
+	setRowNum(convertRowNumToRowSheet(stoi(s2)));
+	setColNum(convertColNameToColNum(s1));
+	rowNum = 9;
+	colNum = 9;
+}
+
+/*
+ * Returns the row number of the cell.
+ */
+int CellAddress::getRowNum(){
+	return rowNum;
+}
+
+/*
+ * Sets the row number of the cell.
+ */
+void CellAddress::setRowNum(int row){
+	rowNum = row;
+}
+
+/*
+ * Returns the column number of the cell.
+ */
+int CellAddress::getColNum(){
+	return colNum;
+}
+
+/*
+ * Sets the column number of the cell.
+ */
+void CellAddress::setColNum(int col){
+	colNum = col;
 }
 
 /*
@@ -43,7 +72,7 @@ int CellAddress::convertColNameToColNum(std::string &cellref){
 	else{
 		temp = (first*26)+(cellref.back() - 64);
 	}
-	return temp;
+	return temp - 1;
 }
 
 /*
@@ -53,19 +82,19 @@ std::string CellAddress::convertColNumToColName(int colNum){
 	char a[2] = {'@','@'};
 	std::string str;
 	if (colNum <= 26){
-		str += static_cast<char>(a[0]+colNum);
+		str += static_cast<char>(a[0]+(colNum+1));
 	}
 	else if (colNum > 26 && colNum <= 52){
 		str += static_cast<char>(a[0]+1);
-		str += static_cast<char>(a[1]+(colNum-26));
+		str += static_cast<char>(a[1]+((colNum+1)-26));
 	}
 	else if (colNum > 52 && colNum <= 78){
 		str += static_cast<char>(a[0]+2);
-		str += static_cast<char>(a[1]+(colNum-52));
+		str += static_cast<char>(a[1]+((colNum+1)-52));
 	}
 	else if (colNum > 78 && colNum <= 104){
 		str += static_cast<char>(a[0]+3);
-		str += static_cast<char>(a[1]+(colNum-78));
+		str += static_cast<char>(a[1]+((colNum+1)-78));
 	}
 	return str;
 }

@@ -59,6 +59,11 @@ class Cell {
 		float getFloat();
 
 		/*
+		 *Returns the CellAddress of the cell.
+		 */
+		CellAddress getCellAddress();
+
+		/*
 		 * Clears the value of the cell.
 		 */
 		void empty();

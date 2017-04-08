@@ -11,8 +11,6 @@
 
 using namespace std;
 
-
-
 static const int lines(24);
 static const int cols(80);
 
@@ -89,16 +87,17 @@ void cellTest(){
 
 void testAddress(){
 	Sheet sheet;
-	for(Sheet::iterator it = sheet.begin(); it != sheet.end(); ++it){
-		it->getCell(2).setFloat(9.f);
-		cout << it->getCell(2).getFloat()<< " ";
-	}
-
+	sheet.getCell(0,5).setFloat(0.5f);
+	string ref = "E1";
+	sheet.getCell(0,5).getCellAddress().createFromReference(ref);
+	cout << "ROW: " << sheet.getCell(0,5).getCellAddress().getRowNum() << endl;
+	cout << "COLUMN: " << sheet.getCell(0,5).getCellAddress().getColNum() << endl;
+	cout << "CELLVALUE: " << sheet.getCell(0,5).getFloat() << endl;
 }
 
 
 int main(void) {
-
+	testAddress();
 	//cellTest();
 	return 0;
 }

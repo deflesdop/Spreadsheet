@@ -55,6 +55,26 @@ class CellAddress{
 	 */
 	void createFromReference(std::string &cellref);
 
+	/*
+	 * Returns the row number of the cell.
+	 */
+	int getRowNum();
+
+	/*
+	 * Sets the row number of the cell.
+	 */
+	void setRowNum(int row);
+
+	/*
+	 * Sets the column number of the cell.
+	 */
+	void setColNum(int col);
+
+	/*
+	 * Returns the column number of the cell.
+	 */
+	int getColNum();
+
 
 
 };
