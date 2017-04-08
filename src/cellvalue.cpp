@@ -7,7 +7,7 @@
 #include "../include/cellvalue.h"
 
 template <>
-float CellValue<string>::returnFloatValue()
+float CellValue<string>::getFloat()
 {
 	return 1;
 }

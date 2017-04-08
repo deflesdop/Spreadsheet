@@ -22,13 +22,13 @@ class CellValueBase {
 		 *Returns the string of the cell used for drawing
 		 *the spreadsheet.
 		 */
-		virtual string returnInfo() = 0;
+		virtual string getString() = 0;
 
 
 		/*
 		 * Returns the value of the cell as float.
 		 */
-		virtual float returnFloatValue() = 0;
+		virtual float getFloat() = 0;
 
 };
 #endif

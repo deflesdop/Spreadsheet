@@ -3,9 +3,9 @@
 
 #include <memory>
 #include <iostream>
-#include "../include/cellvaluebase.h"
-#include "../include/cellvalue.h"
-
+#include "cellvaluebase.h"
+#include "cellvalue.h"
+#include "celladdress.h"
 
 /*
  * Header file for the Cell class.
@@ -21,6 +21,7 @@ class Cell {
 	 * Unique pointer to a CellValueBase.
 	 */
 	std::unique_ptr<CellValueBase> value;
+	CellAddress address;
 
 	public:
 
@@ -38,29 +39,29 @@ class Cell {
 		 *Stores a new value in a cell.
 		 *PARAMS float type, value to store.
 		 */
-		void setFloatValue(const float val);
+		void setFloat(const float val);
 
 		/*
 		 *Stores a new value in a cell.
 		 *PARAMS string type, value to store.
 		 */
-		void setStringValue(const std::string val);
+		void setString(const std::string val);
 		
 		/*
 		 *Returns the string of the cell used for drawing
 		 *the spreadsheet.
 		 */
-		std::string readStrValueDraw();
+		std::string getString();
 
 		/*
 		 * Returns the value of the cell as float.
 		 */
-		float readFloatValue();
+		float getFloat();
 
 		/*
 		 * Clears the value of the cell.
 		 */
-		void emptyCell();
+		void empty();
 
 
 };

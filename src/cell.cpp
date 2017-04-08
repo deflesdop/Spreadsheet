@@ -23,7 +23,7 @@ using namespace std;
 	 *Stores a new value in a cell.
 	 *PARAMS float type, value to store.
 	 */
-	void Cell::setFloatValue(const float val){
+	void Cell::setFloat(const float val){
 		value.reset(new CellValue<float>(val));
 	}
 
@@ -31,7 +31,7 @@ using namespace std;
 	 *Stores a new value in a cell.
 	 *PARAMS string type, value to store.
 	 */
-	void Cell::setStringValue(const string val){
+	void Cell::setString(const string val){
 		value.reset(new CellValue<string>(val));
 	}		
 		
@@ -39,20 +39,20 @@ using namespace std;
 	 *Returns the string of the cell used for drawing
 	 *the spreadsheet.
 	 */
-	string Cell::readStrValueDraw(){
-		return value->returnInfo();
+	string Cell::getString(){
+		return value->getString();
 	}
 
 	/*
 	 * Returns the value of the cell as float.
 	 */
-	float Cell::readFloatValue(){
-		return value->returnFloatValue();
+	float Cell::getFloat(){
+		return value->getFloat();
 	}
 
 	/*
 	 * Clears the value of the cell.
 	 */
-	void Cell::emptyCell(){
+	void Cell::empty(){
 		value.reset(nullptr);
 	}

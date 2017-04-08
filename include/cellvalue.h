@@ -1,6 +1,7 @@
 #ifndef CELLVALUE_H_
 #define CELLVALUE_H_
 
+#include <boost/lexical_cast.hpp>
 #include <string>
 #include <sstream>
 #include "cellvaluebase.h"
@@ -36,7 +37,7 @@ class CellValue : public CellValueBase
 	 *Returns the string of the cell used for drawing
 	 *the spreadsheet.
 	 */
-	string returnInfo(){
+	string getString(){
 		stringstream os;
 		os << value;
 		return os.str();
@@ -45,13 +46,18 @@ class CellValue : public CellValueBase
 	
 	/*
 	 * Returns the value of the cell as float.
-	 * *****************
-	 * Gets called when Cell<string> is created
-	 * causing an conversion error.
-	 * TODO Fix conversion error.
 	 */
-	float returnFloatValue(){
-		return 0.f;
+	float getFloat(){
+		float temp;
+		try{
+			temp = boost::lexical_cast<float>(value);
+			return temp;
+		}
+		catch(boost::bad_lexical_cast &error){
+			temp = -99.f;
+			return temp;
+		}
+		//return 0.f;
 	}
 
 };

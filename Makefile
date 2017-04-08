@@ -4,6 +4,7 @@ OBJDIR = bin
 OBJS =	$(addprefix $(OBJDIR)/, $(patsubst $(SRC)/%.cpp, %.o, $(wildcard $(SRC)/*.cpp)))
 INC = include
 SRC = src
+LIB = curses
 TARGET =	main
 
 .PHONY: all clean
@@ -23,7 +24,7 @@ $(OBJDIR)/%.o:	$(SRC)/%.cpp
     
 $(TARGET):	$(OBJS)
 	@echo Building executable $@
-	@$(CXX) $(CFLAGS) -I$(INC) -o $@ $^
+	$(CXX) $(CFLAGS) -I$(INC) -o $@ $^ -l$(LIB)
 	
 
 clean:
