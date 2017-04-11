@@ -51,13 +51,6 @@ using namespace std;
 	}
 
 	/*
-	 *Returns the CellAddress of the cell.
-	 */
-	CellAddress Cell::getCellAddress(){
-		return address;
-	}
-
-	/*
 	 * Clears the value of the cell.
 	 */
 	void Cell::empty(){

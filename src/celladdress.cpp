@@ -6,10 +6,11 @@
  */
 #include "../include/celladdress.h"
 #include <string>
+#include <iostream>
 
 
 CellAddress::CellAddress()
-{rowNum = 0, colNum = 0;}
+{rowNum = -99, colNum = -99;}
 
 
 CellAddress::CellAddress(std::string &ref){
@@ -18,18 +19,22 @@ CellAddress::CellAddress(std::string &ref){
 
 void CellAddress::createFromReference(std::string &ref){
 	std::string s1,s2;
+	if(ref.size() <= 0 || ref.size() > 4){
+		throw "Illegal_Format_Exception";
+	}
 	for(char c : ref){
 		if(isdigit(c)){
 			s2 += c;
 		}
-		else{
+		else if(isalpha(c)){
 			s1 += c;
 		}
 	}
+	if(s2.empty() || s1.empty()){
+		throw "Illegal_Format_Exception";
+	}
 	setRowNum(convertRowNumToRowSheet(stoi(s2)));
 	setColNum(convertColNameToColNum(s1));
-	rowNum = 9;
-	colNum = 9;
 }
 
 /*
@@ -79,8 +84,12 @@ int CellAddress::convertColNameToColNum(std::string &cellref){
  * Converts a column number to a column reference.
  */
 std::string CellAddress::convertColNumToColName(int colNum){
+	if(colNum < 0 || colNum > MaxCol){
+		throw "Out_of_Bounds_Exception";
+	}
 	char a[2] = {'@','@'};
 	std::string str;
+
 	if (colNum <= 26){
 		str += static_cast<char>(a[0]+(colNum+1));
 	}

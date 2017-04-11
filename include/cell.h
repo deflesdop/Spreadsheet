@@ -21,7 +21,6 @@ class Cell {
 	 * Unique pointer to a CellValueBase.
 	 */
 	std::unique_ptr<CellValueBase> value;
-	CellAddress address;
 
 	public:
 
@@ -57,11 +56,6 @@ class Cell {
 		 * Returns the value of the cell as float.
 		 */
 		float getFloat();
-
-		/*
-		 *Returns the CellAddress of the cell.
-		 */
-		CellAddress getCellAddress();
 
 		/*
 		 * Clears the value of the cell.

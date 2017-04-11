@@ -87,12 +87,12 @@ void cellTest(){
 
 void testAddress(){
 	Sheet sheet;
-	sheet.getCell(0,5).setFloat(0.5f);
-	string ref = "E1";
-	sheet.getCell(0,5).getCellAddress().createFromReference(ref);
-	cout << "ROW: " << sheet.getCell(0,5).getCellAddress().getRowNum() << endl;
-	cout << "COLUMN: " << sheet.getCell(0,5).getCellAddress().getColNum() << endl;
-	cout << "CELLVALUE: " << sheet.getCell(0,5).getFloat() << endl;
+	sheet.getCell(0,0).setFloat(0.5f);
+	string ref = "A6";
+	CellAddress celladdress;
+	celladdress.createFromReference(ref);
+	cout << celladdress.getColNum() << endl;
+	cout << celladdress.getRowNum() << endl;
 }
 
 

@@ -12,8 +12,10 @@
 
 class CellAddress{
 
-	private:
 
+	private:
+	const int MaxCol = 80;
+	const int MaxRol = 24;
 	int rowNum, colNum;
 
 	/*
