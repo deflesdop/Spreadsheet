@@ -3,23 +3,29 @@
 #include <string>
 #include "../include/celladdress.h"
 #include "../include/editwindow.h"
+#include "../include/editcontroller.h"
 
-EditWindow::EditWindow(WINDOW* win, CellAddress location){
+EditWindow::EditWindow(CellAddress location){
 	noecho();
+	curs_set(1);
 	cursor = location;
-	popup = subwin(win, height, width, 2, 16);
+	popup = newwin(height, width, cursor.getRowNum()+1, cursor.getColNum()*8 + 8);
+	keypad(popup, TRUE);
+}
+
+void EditWindow::drawWindow(const char* str){
+	wborder(popup, '|', '|', '-', '-', '+', '+', '+', '+');
+	mvwaddstr(popup, 1, 1, str);
 	wrefresh(popup);
 }
 
-void EditWindow::drawWindow(){
-	wborder(popup, '|', '|', '-', '-', '+', '+', '+', '+');
-	mvwaddstr(popup, 1,1,"Sub");
-	
-	
+void EditWindow::openEditor(Sheet &sheet){
+	EditController econ;
+	econ.editCell(popup, sheet, cursor);
 }
+
 void EditWindow::deleteWindow(){
+	wrefresh(popup);
 	delwin(popup);
-}
-void EditWindow::readWindow(Sheet &sheet){
 
 }

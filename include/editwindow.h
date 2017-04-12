@@ -5,9 +5,10 @@
 
 class EditWindow{
 	public:
-		EditWindow(WINDOW* win, CellAddress location);
+		EditWindow(CellAddress location);
 		~EditWindow() = default;
-		void drawWindow();
+		void drawWindow(const char* str);
+		void openEditor(Sheet &sheet);
 		void deleteWindow();
 		void readWindow(Sheet &sheet);
 	private:

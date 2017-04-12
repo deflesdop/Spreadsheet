@@ -13,6 +13,7 @@ SheetView::SheetView(){
   	scrollok(win, TRUE);
   	keypad(win, TRUE);
   	wmove(win, 0, 0);
+  	curs_set(0);
   	cursor.setRowNum(0);
 	cursor.setColNum(0);	
 }
@@ -82,9 +83,9 @@ void SheetView::initHeader(){
 
 }
 
-std::string SheetView::formatCell(std::string value){
-	if(value.size() > 8){
-		value.resize(8);
+std::string SheetView::formatCell(std::string value, const size_t size){
+	if(value.size() > size){
+		value.resize(size);
 		return value;
 	}
 	return value;
@@ -95,7 +96,7 @@ void SheetView::drawSheet(Sheet &sheet){
 	for (Sheet::iterator sit = sheet.begin(); sit != sheet.end(); ++sit){
 		for(Column::iterator cit = sit->begin() ; cit != sit->end(); ++cit){
 			if(!cit->isEmpty()){
-				waddstr(win, formatCell(cit->getString()).c_str());
+				waddstr(win, formatCell(cit->getString(), 8).c_str());
 				}
 			wmove(win, ++row, col);
 		}
@@ -107,17 +108,25 @@ void SheetView::drawSheet(Sheet &sheet){
 }
 
 void SheetView::drawCursor(Sheet &sheet, int row, int col){
-
 	row++;
 	col++;
+	int size = 8;
 	wmove(win,row,CellSize*col);
 	attr_t old_attr;
 	short old_pair;
 	wattr_get(win, &old_attr, &old_pair, NULL);
 	wattron(win, A_STANDOUT);
 	if(!sheet.getCell(row-1,col-1).isEmpty()){
-			waddstr(win, formatCell(sheet.getCell(row-1, col-1).getString()).c_str());
+		if(sheet.getCell(row-1, col-1).getString().size() > 8){
+			waddstr(win, formatCell(sheet.getCell(row-1, col-1).getString(), 8).c_str());
 		}
+		else{
+			size -= sheet.getCell(row-1, col-1).getString().size();
+			waddstr(win, sheet.getCell(row-1, col-1).getString().c_str());
+			for(int i = 0; i < size; i++)
+				waddch(win, ' ');
+		}
+	}
 	else{
 		for(int i = 1; i <= CellSize; i++){
 			waddch(win, ' ');
@@ -126,6 +135,7 @@ void SheetView::drawCursor(Sheet &sheet, int row, int col){
 	}
 	wattr_set(win, old_attr, old_pair, NULL); /* Oude settings terugzetten */
 	wmove(win,row,CellSize*col);
+	wrefresh(win);
 }
 
 CellAddress SheetView::getCursor(){
@@ -134,20 +144,29 @@ CellAddress SheetView::getCursor(){
 
 void SheetView::setCursor(int row, int col){
 	cursor.setRowNum(row);
-	cursor.setColNum(col);	
+	cursor.setColNum(col);
 }
 
 char SheetView::getChar(){
-	return wgetch(win);
+	return winch(win);
 }
 
-void SheetView::drawPopup(){
-	EditWindow edit(win, getCursor());
-	edit.drawWindow();
-		int ch;
-	  while ((ch = wgetch(win)) != 's');
+void SheetView::drawPopup(Sheet &sheet){
+	EditWindow edit(cursor);
+	std::string s1;
+
+	if(!sheet.getCell(getCursor().getRowNum(),getCursor().getColNum()).isEmpty())
+		s1 = sheet.getCell(getCursor().getRowNum(),getCursor().getColNum()).getString();
+
+	edit.drawWindow(formatCell(s1, 14).c_str());
+	edit.openEditor(sheet);
 	edit.deleteWindow();
-	wrefresh(curscr);
+
+
+	drawCursor(sheet,cursor.getColNum(), cursor.getRowNum());
+	curs_set(0);
+	wrefresh(win);
+	redrawwin(win);
 }
 
 void SheetView::suspend(){
