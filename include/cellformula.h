@@ -14,21 +14,25 @@ using namespace std;
 
 class CellFormula : public CellValueBase{
 
-
+public:
 
 	/*
 	 *Returns the string of the cell used for drawing
 	 *the spreadsheet.
 	 */
-	string returnInfo();
+	string getString();
 
 
 	/*
 	 * Returns the value of the cell as float.
 	 */
-	float returnFloatValue();
+	float getFloat();
 
+	std::string parseFormula(std::string formula, std::string cell1, std::string cell2);
 
+	int calculateFormula();
+
+private:
 
 };
 
