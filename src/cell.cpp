@@ -56,3 +56,7 @@ using namespace std;
 	void Cell::empty(){
 		value.reset(nullptr);
 	}
+	
+	bool Cell::isEmpty(){
+		return (value == nullptr);
+	}

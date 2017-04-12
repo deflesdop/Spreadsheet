@@ -3,13 +3,20 @@
 #include <curses.h>
 #include <string>
 #include "sheet.h"
+#include "celladdress.h"
 
 class SheetView{
 	public:
 		SheetView();
 		~SheetView();
 		void initHeader();
-		void drawSheet(Sheet sheet);
+		std::string formatCell(std::string);
+		void drawSheet(Sheet &sheet);
+		void drawCursor(Sheet &sheet, int row, int col);
+		CellAddress getCursor();
+		void setCursor(int row, int col); 
+		char getChar();
+		void drawPopup();
 		void exitSheet();
 		void suspend();
 		std::string headerLetter(int colNum);
@@ -18,6 +25,7 @@ class SheetView{
 		const int MAXrow = 24;
 		const int MAXcol = 80;
 		const int CellSize = 8;
+		CellAddress cursor;
 		WINDOW *win;
 
 };

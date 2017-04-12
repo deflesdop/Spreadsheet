@@ -13,9 +13,12 @@
 
 int main(void) {
 	Sheet sheet;
+	sheet.getCell(1,1).setString("Hello, this is a cell");	
 	SheetView sheetview;
 	sheetview.initHeader();
 	sheetview.drawSheet(sheet);
+	sheetview.drawCursor(sheet, 1,1);
+	sheetview.drawPopup();
 	sheetview.suspend();
 	sheetview.exitSheet();
 	return 0;

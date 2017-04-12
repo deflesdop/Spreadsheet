@@ -77,6 +77,11 @@ class CellAddress{
 	 */
 	int getColNum();
 
+	CellAddress &operator=(const CellAddress &x){
+		this->rowNum = x.rowNum;
+		this->colNum = x.colNum;
+		return *this;
+	}
 
 
 };

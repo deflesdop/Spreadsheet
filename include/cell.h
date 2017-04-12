@@ -61,6 +61,8 @@ class Cell {
 		 * Clears the value of the cell.
 		 */
 		void empty();
+		
+		bool isEmpty();
 
 
 };

@@ -9,8 +9,9 @@
 #include <iostream>
 
 
-CellAddress::CellAddress()
-{rowNum = -99, colNum = -99;}
+CellAddress::CellAddress():
+rowNum(-99), colNum(-99)
+{}
 
 
 CellAddress::CellAddress(std::string &ref){
