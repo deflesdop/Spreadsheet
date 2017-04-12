@@ -12,9 +12,11 @@
 
 
 int main(void) {
-	SheetView sheet;
-	sheet.initHeader();
-	sheet.suspend();
-	sheet.exitSheet();
+	Sheet sheet;
+	SheetView sheetview;
+	sheetview.initHeader();
+	sheetview.drawSheet(sheet);
+	sheetview.suspend();
+	sheetview.exitSheet();
 	return 0;
 }

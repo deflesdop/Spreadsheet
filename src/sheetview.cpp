@@ -2,6 +2,7 @@
 #include <curses.h>
 #include <string>
 #include "../include/sheet.h"
+#include "../include/column.h"
 
 SheetView::SheetView(){
 	initscr();
@@ -73,15 +74,23 @@ void SheetView::initHeader(){
 			}
 		}
 	}
-
+//it->getCell(row-1).getString().c_str()
 	wattr_set(win, old_attr, old_pair, NULL); /* Oude settings terugzetten */
 	wmove(win,1,CellSize);
 
 }
 
 void SheetView::drawSheet(Sheet sheet){
-	for (Sheet::iterator it = sheet.begin(); it != sheet.end(); ++it){
-
+	int row = 1,col = 8;
+	for (Sheet::iterator sit = sheet->begin(); sit != sheet->end(); ++sit){
+		for(Column::iterator cit = sit->begin() ; cit != sit->end(); ++cit){
+			
+			//waddstr(win,"HELLO WORLD" );
+		//	wprintw(win,"%d", 3);
+		//	wmove(win, ++row, col);
+		}
+	//	col += 8;
+	//	wmove(win, row, col);
 	}
 }
 

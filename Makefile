@@ -8,7 +8,8 @@ INC = include
 SRC = src
 LIB = curses
 BOOST_LIBS =  -lboost_unit_test_framework
-BOOST_CXXFLAGS =  -DBOOST_TEST_DYN_LINK
+BOOST_CXXFLAGS = -I/vol/share/groups/liacs/scratch/pt2017/include -DBOOST_TEST_DYN_LINK
+LDFLAGS = -L/vol/share/groups/liacs/scratch/pt2017/lib
 TARGET =	main
 TEST = test
 
@@ -23,7 +24,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o:	$(SRC)/%.cpp
 	@echo Building $@
-	@$(CXX) $(CFLAGS) -c $< -o $@	
+	@$(CXX) $(CFLAGS) $(BOOST_CXXFLAGS) $(LDFLAGS) -c $< -o $@	
 	@echo Done Building $@
 	
     
