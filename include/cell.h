@@ -46,6 +46,8 @@ class Cell {
 		 */
 		void setString(const std::string val);
 		
+		void setCellValue(CellValueBase* base);
+		
 		/*
 		 *Returns the string of the cell used for drawing
 		 *the spreadsheet.

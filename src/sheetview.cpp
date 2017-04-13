@@ -8,11 +8,11 @@ SheetView::SheetView(){
 	initscr();
   	noecho();
 
-  	win = newwin(MAXrow+2, MAXcol*CellSize+CellSize, 0, 0);
+  	win = newwin(MAXrow+3, MAXcol*CellSize+CellSize, 0, 0);
   	scrollok(win, TRUE);
   	keypad(win, TRUE);
   	wmove(win, 0, 0);
-  	curs_set(1);
+  	curs_set(0);
 
   	cursor.setRowNum(0);
 	cursor.setColNum(0);	
@@ -78,8 +78,6 @@ void SheetView::initHeader(){
 		}
 	}
 	wattr_set(win, old_attr, old_pair, NULL); /* Oude settings terugzetten */
-	wrefresh(win);
-
 }
 
 std::string SheetView::formatCell(std::string value, const size_t size){
@@ -105,7 +103,6 @@ void SheetView::drawSheet(Sheet &sheet){
 		wmove(win, row, col);
 	}
 	wmove(win, cursor.getRowNum()+1, (cursor.getColNum()*CellSize)+8);
-	wrefresh(win);
 }
 
 void SheetView::drawCursor(Sheet &sheet){
@@ -137,7 +134,6 @@ void SheetView::drawCursor(Sheet &sheet){
 	}
 	wattr_set(win, old_attr, old_pair, NULL); /* Oude settings terugzetten */
 	wmove(win, cursor.getRowNum()+1, (cursor.getColNum()*CellSize)+8);
-	wrefresh(win);
 }
 
 CellAddress SheetView::getCursor(){

@@ -23,15 +23,13 @@ class Range{
 
 	public:
 
-		Range(Sheet &sheet);
-
 		Range(Sheet &sheet, CellAddress begin, CellAddress end);
 
 		RangeIterator begin();
 
 		RangeIterator end();
 
-		Range* makeRangeIt(Sheet sheet, RangeIterator begin, RangeIterator end);
+		Range* makeRangeIt(Sheet sheet, CellAddress begin, CellAddress end);
 
 		Range* makeRangeRef(Sheet sheet, std::string ref);
 
@@ -46,11 +44,11 @@ class RangeIterator : public std::iterator<std::input_iterator_tag, int>
 {
 	private:
 	Sheet &sheet;
-	int offsetX, offsetY;
+	int offsetX, offsetY, endX, endY;
 
 	public:
-		RangeIterator(Sheet &sheet, int offsetX, int offsetY)
-			:sheet(sheet), offsetX(offsetX), offsetY(offsetY)
+		RangeIterator(Sheet &sheet, int offsetY, int offsetX, int endY, int endX)
+			:sheet(sheet), offsetX(offsetX), offsetY(offsetY), endX(endX), endY(endY)
 			{}
 
 		bool operator==(const RangeIterator &iter) const
@@ -75,8 +73,15 @@ class RangeIterator : public std::iterator<std::input_iterator_tag, int>
 
 		RangeIterator &operator++()
 			{
-			++offsetY;
-			++offsetX;
+			if(offsetX < endX){
+				if(offsetY < endY){
+					offsetY++;
+				}
+				else{
+					offsetX++;
+					offsetY = 0;
+				}
+			}
 			return *this;
 			}
 };

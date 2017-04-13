@@ -16,10 +16,10 @@ class SheetController{
 	SheetController();
 	~SheetController() = default;
 
-	void moveLeft(WINDOW* win, CellAddress cursor);
-	void moveRight(WINDOW* win, CellAddress cursor);
-	void moveUp(WINDOW* win, CellAddress cursor);
-	void moveDown(WINDOW* win, CellAddress cursor);
+	void moveLeft(WINDOW* win);
+	void moveRight(WINDOW* win);
+	void moveUp(WINDOW* win);
+	void moveDown(WINDOW* win);
 	void openEditor(Sheet &sheet, CellAddress cursor);
 	void pressEnter(Sheet &sheet, CellAddress cursor);
 	void pressBackspace(Sheet &sheet, CellAddress cursor);

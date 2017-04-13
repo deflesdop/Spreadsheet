@@ -10,25 +10,25 @@ SheetController::SheetController(){
 	row = 0, col = 0;
 }
 
-void SheetController::moveLeft(WINDOW* win, CellAddress cursor){
+void SheetController::moveLeft(WINDOW* win){
 	if(col > 0)
 		--col;
 	wmove(win, row+1, col*maxCellSize+8);
 }
 
-void SheetController::moveRight(WINDOW* win, CellAddress cursor){
+void SheetController::moveRight(WINDOW* win){
 	if(col < maxCol)
 		++col;
 	wmove(win, row+1, col*maxCellSize+8);
 }
 
-void SheetController::moveUp(WINDOW* win, CellAddress cursor){
+void SheetController::moveUp(WINDOW* win){
 	if(row > 0)
 		--row;
 	wmove(win, row+1, col*maxCellSize+8);
 }
 
-void SheetController::moveDown(WINDOW* win, CellAddress cursor){
+void SheetController::moveDown(WINDOW* win){
 	if(row < maxRow)
 		++row;
 	wmove(win, row+1, col*maxCellSize+8);
@@ -44,7 +44,7 @@ void SheetController::openEditor(Sheet &sheet, CellAddress cursor){
 	edit.drawWindow(s1.c_str());
 	edit.openEditor(sheet);
 	edit.deleteWindow();
-	curs_set(1);
+	curs_set(0);
 }
 
 void SheetController::pressEnter(Sheet &sheet, CellAddress cursor){
@@ -60,19 +60,19 @@ void SheetController::handleInput(WINDOW* win, CellAddress cursor, Sheet &sheet,
 	switch(ch){
 
 	case	KEY_LEFT:
-			moveLeft(win, cursor);
+			moveLeft(win);
 			break;
 
 	case	KEY_RIGHT:
-			moveRight(win, cursor);
+			moveRight(win);
 			break;
 
 	case	KEY_UP:
-			moveUp(win, cursor);
+			moveUp(win);
 			break;
 
 	case	KEY_DOWN:
-			moveDown(win, cursor);
+			moveDown(win);
 			break;
 
 	case	KEY_BACKSPACE:
@@ -81,7 +81,7 @@ void SheetController::handleInput(WINDOW* win, CellAddress cursor, Sheet &sheet,
 
 	case	'\n':
 	case	KEY_ENTER:
-			openEditor(sheet,cursor);
+			pressEnter(sheet,cursor);
 			break;
 
 	case	'q':
@@ -99,15 +99,18 @@ void SheetController::parseCell(CellAddress cursor, Sheet &sheet){
 
 void SheetController::run(Sheet &sheet){
 	SheetView view;
-	view.initHeader();
 	wmove(view.getWin(), 1,8);
-	view.drawSheet(sheet);
 
 	int command;
 	do{
-
+		wclear(view.getWin());
+		view.initHeader();
+		view.drawSheet(sheet);
+		wrefresh(view.getWin());
 		handleInput(view.getWin(), view.getCursor(), sheet, command);
-		//view.drawCursor(sheet);
+		view.setCursor(row,col);
+		view.drawCursor(sheet);
+		
 
 		wrefresh(view.getWin());
 

@@ -5,29 +5,30 @@
 #include "../include/editwindow.h"
 #include "../include/editcontroller.h"
 
-EditWindow::EditWindow(CellAddress location){
+EditWindow::EditWindow(CellAddress loc){
 	noecho();
 	curs_set(1);
-	cursor = location;
-	popup = newwin(height, width, cursor.getRowNum()+1, cursor.getColNum()*8 + 8);
+	cursor = loc;
+	popup = newwin(height, width, 27, 9);
 	keypad(popup, TRUE);
 }
 
 void EditWindow::drawWindow(const char* str){
-	//wborder(popup, '|', '|', '-', '-', '+', '+', '+', '+');
 	wborder(popup, 0, 0, 0, 0, 0, 0, 0, 0);
 	mvwaddstr(popup, 1, 1, str);
 	wrefresh(popup);
+	
 }
 
 void EditWindow::openEditor(Sheet &sheet){
 	EditController econ;
 	econ.editCell(popup, sheet, cursor);
+	wclear(popup);
+	wrefresh(popup);
 	deleteWindow();
 }
 
 void EditWindow::deleteWindow(){
-	wrefresh(popup);
 	delwin(popup);
 
 }

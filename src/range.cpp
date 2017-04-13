@@ -6,26 +6,20 @@
  */
 #include "../include/range.h"
 
-Range::Range(Sheet &sheet):
-	sheetref(sheet)
-{}
-
 Range::Range(Sheet &sheet, CellAddress begin, CellAddress end):
 	sheetref(sheet), beginAddress(begin), endAddress(end)
 {}
 
 RangeIterator Range::begin(){
-	return RangeIterator(sheetref,beginAddress.getColNum(),beginAddress.getRowNum());
+	return RangeIterator(sheetref,beginAddress.getColNum(),beginAddress.getRowNum(),endAddress.getColNum(),endAddress.getRowNum());
 }
 
 RangeIterator Range::end(){
-	return RangeIterator(sheetref,endAddress.getColNum(),endAddress.getRowNum());
+	return RangeIterator(sheetref,endAddress.getColNum(),endAddress.getRowNum(),endAddress.getColNum(),endAddress.getRowNum());
 }
 
-Range* Range::makeRangeIt(Sheet sheet, RangeIterator begin, RangeIterator end){
-	CellAddress cellad;
-
-	return new Range(sheet);
+Range* Range::makeRangeIt(Sheet sheet, CellAddress begin, CellAddress end){
+	return new Range(sheet, begin, end);
 }
 
 Range* Range::makeRangeRef(Sheet sheet, std::string ref){
@@ -41,8 +35,9 @@ Range* Range::makeRangeRef(Sheet sheet, std::string ref){
 	}
 	catch(const char* msg){
 		std::cerr << msg << std::endl;
+		return nullptr;
 	}
 
-	return new Range(sheet,begin,end);
+	return new Range(sheet, begin, end);
 
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include "../include/sheet.h"
 #include "../include/editcontroller.h"
+#include "../include/cellvaluebase.h"
 
 EditController::EditController(){
 	xIndex = 1;
@@ -62,6 +63,7 @@ void EditController::handleInput(WINDOW* popup, int ch){
 
 void EditController::editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor){
 	int command;
+	CellValueBase* base;
 	std::string str;
 	chtype t;
 
@@ -77,6 +79,6 @@ void EditController::editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor){
 		t = mvwinch(popup,1,1+i);
 		str+=t;
 	}
-
-	sheet.getCell(cursor.getColNum(), cursor.getRowNum()).setString(str);
+	base = CellValueBase::cellValueFactory(str);
+	sheet.getCell(cursor.getRowNum(), cursor.getColNum()).setCellValue(base);
 }

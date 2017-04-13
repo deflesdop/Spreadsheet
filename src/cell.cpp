@@ -33,7 +33,11 @@ using namespace std;
 	 */
 	void Cell::setString(const string val){
 		value.reset(new CellValue<string>(val));
-	}		
+	}	
+	
+	void Cell::setCellValue(CellValueBase* base){
+		value.reset(base);
+	}	
 		
 	/*
 	 *Returns the string of the cell used for drawing
