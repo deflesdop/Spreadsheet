@@ -7,17 +7,17 @@
 class SheetObserver{
 	public:
 	
-		SheetObserver(){
-		//	sheet = sheetref;
-		//	sheet.addObserver(this);
+		SheetObserver(Sheet &sheet){
+			sheet.addObserver(this);
+
 		}
 		
 		
-		~SheetObserver() = default;
-		virtual void cellChanged();
+		virtual ~SheetObserver() = default;
+		virtual void cellChanged() = 0;
 	
 	private:
-		//Sheet& sheet;
+
 };
 
 

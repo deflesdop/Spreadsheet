@@ -12,7 +12,7 @@
 #include "../include/sheetobserver.h" 
 
 CellFormula::CellFormula(std::string formula, Sheet &sheetref):
-	SheetObserver(),
+	SheetObserver(sheetref),
 	rawFormula(formula), sheetref(sheetref), sum(0), count(0), avg(0)
 {}
 

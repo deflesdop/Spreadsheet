@@ -40,7 +40,8 @@ void Sheet::setCellValue(CellValueBase* base, int row, int column){
 }
 
 void Sheet::notify(){
-	for(int i = 0; i < observer.size(); i++){
+	int size = observer.size();
+	for(int i = 0; i < size; i++){
 		observer[i]->cellChanged();
 	}
 }

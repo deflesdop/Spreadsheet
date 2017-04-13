@@ -12,7 +12,7 @@
 #include "column.h"
 #include <iterator>
 #include <vector>
-#include "sheetobserver.h"
+//#include "sheetobserver.h"
 #include "cellvaluebase.h"
 #include <string>
 
@@ -21,6 +21,7 @@
  *Class which holds a vector list of Column objects
  *to form a spreadsheet.
  */
+class SheetObserver;
 class SheetIterator;
 class Sheet{
 
@@ -38,7 +39,7 @@ class Sheet{
 	
 	std::vector<SheetObserver*> observer;
 	
-	void addObserver(SheetObserver* sheetobs);
+
 
 	public:
 
@@ -56,6 +57,8 @@ class Sheet{
 	
 	void setCellValue(CellValueBase* base, int row, int column);
 	
+	void addObserver(SheetObserver* sheetobs);
+
 	void notify();
 
 	typedef SheetIterator iterator;
