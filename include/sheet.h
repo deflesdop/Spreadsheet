@@ -11,6 +11,10 @@
 #include "cell.h"
 #include "column.h"
 #include <iterator>
+#include <vector>
+#include "sheetobserver.h"
+#include "cellvaluebase.h"
+#include <string>
 
 /*
  *Header file for Sheet class.
@@ -31,30 +35,28 @@ class Sheet{
 	 * Number of columns in the spreadsheet.
 	 */
 	const static int maxColumnNumber = 80;
+	
+	std::vector<SheetObserver*> observer;
+	
+	void addObserver(SheetObserver* sheetobs);
 
 	public:
 
-	/*Constructor for the Sheet
-	 *
-	 ****************************
-	 * Not working due to unique_ptr being copied somewhere
-	 * TODO Fix call to copyconstructor
-	 */
 	Sheet();
 
 	~Sheet() = default;
 
 	Column& getColumn(int column);
 
-
-	/*
-	 * Returns the Cell pointer at a certain row.
-	 * PARAMS int row, row of the column.
-	 * 		  int column, columns of the sheet.
-	 * *********
-	 * TODO Not yet implemented.
-	 */
 	Cell& getCell(const int row, const int column);
+	
+	void setFloat(const float val, int row, int column);
+	
+	void setString(const std::string val, int row, int column);
+	
+	void setCellValue(CellValueBase* base, int row, int column);
+	
+	void notify();
 
 	typedef SheetIterator iterator;
 
@@ -67,7 +69,6 @@ class Sheet{
 	 *
 	 */
 	SheetIterator end(void);
-
 
 };
 

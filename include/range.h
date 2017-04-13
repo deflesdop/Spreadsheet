@@ -24,6 +24,8 @@ class Range{
 	public:
 
 		Range(Sheet &sheet, CellAddress begin, CellAddress end);
+		
+		typedef RangeIterator iterator;
 
 		RangeIterator begin();
 
