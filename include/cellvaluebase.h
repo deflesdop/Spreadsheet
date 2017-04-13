@@ -2,6 +2,8 @@
 #define CELLVALUEBASE_H_
 
 #include <string>
+
+   
 using namespace std;
 
 /*
@@ -9,12 +11,10 @@ using namespace std;
  * Class for storing values of cells.
  */
 class CellValueBase {
-
-	private:
-
+	
 	public:
 
-		CellValueBase();
+		CellValueBase() = default;
 
 		virtual ~CellValueBase(void) = default;
 
@@ -29,6 +29,11 @@ class CellValueBase {
 		 * Returns the value of the cell as float.
 		 */
 		virtual float getFloat() = 0;
+		
+		static CellValueBase* cellValueFactory(std::string str);
+
+	
+	private:
 
 };
 #endif
