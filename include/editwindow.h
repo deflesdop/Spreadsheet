@@ -10,7 +10,7 @@ class EditWindow{
 		void drawWindow(const char* str);
 		void openEditor(Sheet &sheet);
 		void deleteWindow();
-		void readWindow(Sheet &sheet);
+
 	private:
 		const int height = 3;
 		const int width = 16;

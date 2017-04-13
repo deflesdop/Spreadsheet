@@ -66,6 +66,23 @@ void CellAddress::setColNum(int col){
 	colNum = col;
 }
 
+void CellAddress::incDecRowCursor(bool inc){
+	//int row = getRowNum();
+	(inc ? rowNum++ : rowNum--);
+//	rowNum = row;
+	std::cout << rowNum << "," << colNum<<std::endl;
+}
+
+void CellAddress::incDecColCursor(bool inc){
+	//int col = getColNum();
+	(inc ? colNum++ : colNum--);
+
+	//colNum = col;
+	std::cout << rowNum << "," << colNum<<std::endl;
+}
+
+
+
 /*
  * Converts a column reference to a column number.
  */

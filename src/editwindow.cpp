@@ -14,7 +14,8 @@ EditWindow::EditWindow(CellAddress location){
 }
 
 void EditWindow::drawWindow(const char* str){
-	wborder(popup, '|', '|', '-', '-', '+', '+', '+', '+');
+	//wborder(popup, '|', '|', '-', '-', '+', '+', '+', '+');
+	wborder(popup, 0, 0, 0, 0, 0, 0, 0, 0);
 	mvwaddstr(popup, 1, 1, str);
 	wrefresh(popup);
 }
@@ -22,6 +23,7 @@ void EditWindow::drawWindow(const char* str){
 void EditWindow::openEditor(Sheet &sheet){
 	EditController econ;
 	econ.editCell(popup, sheet, cursor);
+	deleteWindow();
 }
 
 void EditWindow::deleteWindow(){

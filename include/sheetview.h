@@ -12,14 +12,13 @@ class SheetView{
 
 		void initHeader();
 		void drawSheet(Sheet &sheet);
-		void drawCursor(Sheet &sheet, int row, int col);
+		void drawCursor(Sheet &sheet);
 		CellAddress getCursor();
 		void setCursor(int row, int col); 
+
 		char getChar();
-		void drawPopup(Sheet &sheet);
+		WINDOW* getWin();
 		void exitSheet();
-		void suspend();
-		
 
 	private:
 		const int MAXrow = 24;
