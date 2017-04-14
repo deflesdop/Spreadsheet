@@ -14,6 +14,8 @@ class SheetView{
 		void drawSheet(Sheet &sheet);
 		void undoCursor(Sheet &sheet);
 		void drawCursor(Sheet &sheet);
+		bool validateFormula(std::string formula);
+		void parseCell(Cell &cell, int row, int col);
 		CellAddress getCursor();
 		void setCursor(int row, int col); 
 

@@ -13,6 +13,7 @@
 #include "sheet.h"
 #include "sheetobserver.h"
 #include "cell.h"
+#include <curses.h>
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class CellFormula : public CellValueBase, public SheetObserver{
 public:
 
 	CellFormula(std::string formula, Sheet &sheetref);
-	~CellFormula() = default;
+	~CellFormula();
 	
 
 	/*
@@ -37,7 +38,11 @@ public:
 	
 	void calculateFormula();
 
-	void cellChanged(const Cell &cell);
+	virtual void cellChanged(const Cell &cell){
+		//if(recalculateNeeded(cell)){
+			iterate(begin, end);
+		//}
+	}
 
 private:
 	int mode, iterMode;
@@ -62,6 +67,8 @@ private:
 	void iterateVert(CellAddress c1, CellAddress c2);
 
 	void iterateBlock(CellAddress c1, CellAddress c2);
+
+	void reinitValues();
 
 	void setIterMode(CellAddress c1, CellAddress c2);
 

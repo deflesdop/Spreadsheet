@@ -5,6 +5,7 @@
 #include "../include/sheetcontroller.h"
 #include "../include/editwindow.h"
 #include "../include/editcontroller.h"
+#include "../include/cellvaluebase.h"
 #include "../include/cellformula.h"
 
 SheetController::SheetController(){
@@ -93,35 +94,20 @@ void SheetController::handleInput(WINDOW* win, CellAddress cursor, Sheet &sheet,
 	}
 }
 
-
-void SheetController::parseCell(WINDOW* win, CellAddress cursor, Sheet &sheet){
-	std::string str;
-	if(!sheet.getCell(cursor.getRowNum(),cursor.getColNum()).isEmpty())
-		str = sheet.getCell(cursor.getRowNum(),cursor.getColNum()).getString();
-	if(str.front() == '='){
-		CellFormula formula(str,sheet);
-		formula.calculateFormula();
-		str = formula.getString();
-		str.resize(8);
-		mvwaddstr(win, cursor.getRowNum()+1, cursor.getColNum()*maxCellSize+8, str.c_str());
-	}
-}
-
 void SheetController::run(Sheet &sheet){
 	SheetView view;
 	view.initHeader();
+	view.drawSheet(sheet);
 	wmove(view.getWin(), 1,8);
 
 	int command;
 	do{
-		view.undoCursor(sheet);
-		parseCell(view.getWin(), view.getCursor(), sheet);
-		wrefresh(view.getWin());
 		handleInput(view.getWin(), view.getCursor(), sheet, command);
+		wclear(view.getWin());
 		view.setCursor(row,col);
+		view.initHeader();
+		view.drawSheet(sheet);
 		view.drawCursor(sheet);
-
-
 		wrefresh(view.getWin());
 
 	}while((command = wgetch(view.getWin())) != 'q');

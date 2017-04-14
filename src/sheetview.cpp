@@ -88,19 +88,29 @@ std::string SheetView::formatCell(std::string value, const size_t size){
 	return value;
 }
 
+void SheetView::parseCell(Cell &cell, int row, int col){
+	if(!cell.isEmpty()){
+		if(validateFormula(cell.getString())){
+			mvwaddstr(win, row, col,  "        ");
+			mvwprintw(win, row, col, "%f", cell.getFloat());
+		}
+		else{
+			waddstr(win, formatCell(cell.getString(), 8).c_str());
+		}
+	}
+}
+
+
 void SheetView::drawSheet(Sheet &sheet){
-	int row = 1,col = 8;
-	wmove(win,row,col);
+	int sheetrow(1), sheetcol(8);
+	wmove(win,sheetrow,sheetcol);
 	for (Sheet::iterator sit = sheet.begin(); sit != sheet.end(); ++sit){
 		for(Column::iterator cit = sit->begin() ; cit != sit->end(); ++cit){
-			if(!cit->isEmpty()){
-				waddstr(win, formatCell(cit->getString(), 8).c_str());
-				}
-			wmove(win, ++row, col);
+			parseCell(*cit, sheetrow, sheetcol);
+			wmove(win, ++sheetrow, sheetcol);
 		}
-		row = 1;
-		col += 8;
-		wmove(win, row, col);
+		sheetrow = 1, sheetcol += 8;
+		wmove(win, sheetrow, sheetcol);
 	}
 	wmove(win, cursor.getRowNum()+1, (cursor.getColNum()*CellSize)+8);
 }
@@ -161,6 +171,33 @@ void SheetView::drawCursor(Sheet &sheet){
 	wattr_set(win, old_attr, old_pair, NULL); /* Oude settings terugzetten */
 	wmove(win, cursor.getRowNum()+1, (cursor.getColNum()*CellSize)+8);
 }
+
+bool SheetView::validateFormula(std::string formula){
+	int check1(0), check2(0), check3(0), check4(0);
+	for(char c : formula){
+		switch(c){
+		case	'=':
+			check1++;
+			break;
+		case	'(':
+			check2++;
+			break;
+		case	')':
+			check3++;
+			break;
+		case	':':
+			check4++;
+			break;
+		default:
+			break;
+		}
+	}
+	if(check1 == 1 && check2 ==1 && check3 == 1 && check4 ==1)
+		return true;
+	else
+		return false;
+}
+
 
 CellAddress SheetView::getCursor(){
 	return cursor;

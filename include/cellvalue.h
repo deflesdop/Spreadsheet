@@ -33,6 +33,8 @@ class CellValue : public CellValueBase
 		:value(initial_value)
 	{}
 	
+	~CellValue() = default;
+
 	/*
 	 *Returns the string of the cell used for drawing
 	 *the spreadsheet.

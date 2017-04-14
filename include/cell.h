@@ -66,11 +66,14 @@ class Cell {
 		
 		bool isEmpty();
 
-		 bool operator==(const Cell &b){
-		      return this->value == b.value;
-		    }
+		bool isEqual(Cell &cell);
 
-
+		bool operator==(const Cell &x){
+			if(value == x.value)
+				return true;
+			else
+				return false;
+		}
 };
 
 #endif

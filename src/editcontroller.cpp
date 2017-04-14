@@ -63,6 +63,32 @@ void EditController::handleInput(WINDOW* popup, int ch){
 	}
 }
 
+bool EditController::validateFormula(std::string formula){
+	int check1(0), check2(0), check3(0), check4(0);
+	for(char c : formula){
+		switch(c){
+		case	'=':
+			check1++;
+			break;
+		case	'(':
+			check2++;
+			break;
+		case	')':
+			check3++;
+			break;
+		case	':':
+			check4++;
+			break;
+		default:
+			break;
+		}
+	}
+	if(check1 == 1 && check2 ==1 && check3 == 1 && check4 ==1)
+		return true;
+	else
+		return false;
+}
+
 void EditController::editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor){
 	int command;
 	CellValueBase* base;
@@ -73,13 +99,16 @@ void EditController::editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor){
 	while((command = wgetch(popup)) != '\n'){
 		handleInput(popup, command);
 		wrefresh(popup);
-
 	}
 	for(int i = 0; i < maxEditSize-1; i++){
 		t = mvwinch(popup,1,1+i);
 		str+=t;
 	}
-
-	base = CellValueBase::cellValueFactory(str);
+	if(validateFormula(str)){
+		base = new CellFormula(str,sheet);
+	}
+	else{
+		base = CellValueBase::cellValueFactory(str);
+	}
 	sheet.setCellValue(base, cursor.getRowNum(), cursor.getColNum());
 }

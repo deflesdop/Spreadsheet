@@ -2,17 +2,21 @@
 #define INCLUDE_SHEETOBSERVER_H_
 
 #include "sheet.h"
+#include <curses.h>
 
 
 class SheetObserver{
-	public:
+
+	friend class Sheet;
 	
-		SheetObserver(Sheet &sheet){
-			sheet.addObserver(this);
-		}
+	public:
+
+		SheetObserver(){}
 		
-		
-		virtual ~SheetObserver() = default;
+		~SheetObserver(){}
+
+
+
 		virtual void cellChanged(const Cell &cell) = 0;
 	
 	private:

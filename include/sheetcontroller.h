@@ -25,6 +25,7 @@ class SheetController{
 	void pressBackspace(Sheet &sheet, CellAddress cursor);
 
 	void handleInput(WINDOW* win, CellAddress cursor, Sheet &sheet, int ch);
+	bool validateFormula(std::string formula);
 	void parseCell(WINDOW* win, CellAddress cursor, Sheet &sheet);
 
 	void run(Sheet &sheet);

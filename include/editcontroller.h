@@ -13,8 +13,9 @@ class EditController{
 		void moveLeft(WINDOW* popup);
 		void moveRight(WINDOW* popup);
 		void backspace(WINDOW* popup);
-		void editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor);
 		void handleInput(WINDOW* popup, int ch);
+		bool validateFormula(std::string formula);
+		void editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor);
 
 
 	private:

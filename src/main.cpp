@@ -15,7 +15,6 @@
 
 int main(void) {
 	Sheet sheet;
-	sheet.getCell(4,4).setString("TEST");
 	SheetController control;
 	control.run(sheet);
 //	test();

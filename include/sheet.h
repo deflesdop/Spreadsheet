@@ -47,15 +47,17 @@ class Sheet{
 
 	~Sheet();
 
+	void addObserver(SheetObserver* sheetobs);
+
+	void removeObserver(SheetObserver* sheetobs);
+
+	void notify(const Cell &cell);
+
 	Column& getColumn(int column);
 
 	Cell& getCell(const int row, const int column);
 	
 	void setCellValue(CellValueBase* base, int row, int column);
-	
-	void addObserver(SheetObserver* sheetobs);
-
-	void notify(const Cell &cell);
 
 	typedef SheetIterator iterator;
 

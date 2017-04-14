@@ -28,6 +28,17 @@ void Sheet::addObserver(SheetObserver* sheetobs){
 	observer.push_back(sheetobs);
 }
 
+void Sheet::removeObserver(SheetObserver* sheetobs){
+	observer.erase(std::remove(observer.begin(), observer.end(), sheetobs), observer.end());
+}
+
+void Sheet::notify(const Cell &cell){
+	for(SheetObserver* ob : observer){
+		if(ob)
+			ob->cellChanged(cell);
+	}
+}
+
 Column& Sheet::getColumn(int column){
 	return sheet[column];
 }
@@ -38,15 +49,10 @@ Cell& Sheet::getCell(int row, int column){
 
 void Sheet::setCellValue(CellValueBase* base, int row, int column){
 	getCell(row, column).setCellValue(base);
-	//notify(getCell(row,column));
+	notify(getCell(row,column));
 }
 
-void Sheet::notify(const Cell &cell){
-	int size = observer.size();
-	for(int i = 0; i < size; i++){
-		observer[i]->cellChanged(cell);
-	}
-}
+
 /*
 *
 */

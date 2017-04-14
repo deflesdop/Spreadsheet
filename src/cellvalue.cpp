@@ -9,5 +9,5 @@
 template <>
 float CellValue<string>::getFloat()
 {
-	return 1;
+	return 0;
 }
