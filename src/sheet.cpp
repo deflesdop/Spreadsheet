@@ -38,7 +38,7 @@ Cell& Sheet::getCell(int row, int column){
 
 void Sheet::setCellValue(CellValueBase* base, int row, int column){
 	getCell(row, column).setCellValue(base);
-	notify(getCell(row,column));
+	//notify(getCell(row,column));
 }
 
 void Sheet::notify(const Cell &cell){

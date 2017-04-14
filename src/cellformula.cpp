@@ -159,9 +159,11 @@ std::string CellFormula::parseFormula(std::string formula, std::string &cell1, s
 					if(!cit->isEmpty())
 						sum += cit->getFloat();
 					count++;
+					j++;
 				}
-				j++;
+
 			}
+			j = 0;
 			i++;
 		}
 
@@ -210,19 +212,21 @@ std::string CellFormula::parseFormula(std::string formula, std::string &cell1, s
 
 		for(Sheet::iterator sit = sheetref.begin(); sit != sheetref.end(); ++sit){
 			for(Column::iterator cit = sit->begin(); cit != sit->end(); ++cit){
-				if((i >= beginY && i < endY)&&(j >= beginX && j < endX)){
-					if(*cit == cell)
-						return true;
+				if((i >= beginY && i <= endY)&&(j >= beginX && j <= endX)){
+					if((i >= beginY && i < endY)&&(j >= beginX && j < endX)){
+						if(*cit == cell)
+							return true;
+						}
+					j++;
 				}
-				j++;
 			}
+			j = 0;
 			i++;
-		}
+				}
 		return false;
 	}
 
 	void CellFormula::cellChanged(const Cell &cell){
-			//if(recalculateNeeded(cell))
-				//calculateFormula();
-		//iterate(begin, end);
+			if(recalculateNeeded(cell))
+				iterate(begin, end);
 	}
