@@ -17,8 +17,5 @@ int main(void) {
 	Sheet sheet;
 	SheetController control;
 	control.run(sheet);
-//	test();
-
-
 	return 0;
 }

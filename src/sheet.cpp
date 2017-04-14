@@ -2,7 +2,7 @@
  * sheet.cpp
  *
  *  Created on: Apr 5, 2017
- *      Author: asch
+ *      Author: Andrew Huang, Micha de Jong
  */
 #include "../include/sheet.h"
 #include "../include/column.h"
@@ -16,14 +16,6 @@ Sheet::Sheet():
 sheet(maxColumnNumber)
 {}
 
-Sheet::~Sheet(){
-//	std::vector<SheetObserver*>::iterator it = observer.begin();
-//	while (it != observer.end() && *it != nullptr){
-//		delete *it;
-//		it = observer.erase(it);
-//	}
-}
-
 void Sheet::addObserver(SheetObserver* sheetobs){
 	observer.push_back(sheetobs);
 }
@@ -32,10 +24,10 @@ void Sheet::removeObserver(SheetObserver* sheetobs){
 	observer.erase(std::remove(observer.begin(), observer.end(), sheetobs), observer.end());
 }
 
-void Sheet::notify(const Cell &cell){
+void Sheet::notify(){
 	for(SheetObserver* ob : observer){
 		if(ob)
-			ob->cellChanged(cell);
+			ob->cellChanged();
 	}
 }
 
@@ -49,7 +41,7 @@ Cell& Sheet::getCell(int row, int column){
 
 void Sheet::setCellValue(CellValueBase* base, int row, int column){
 	getCell(row, column).setCellValue(base);
-	notify(getCell(row,column));
+	notify();
 }
 
 

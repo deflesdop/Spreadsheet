@@ -17,7 +17,7 @@ class SheetObserver{
 
 
 
-		virtual void cellChanged(const Cell &cell) = 0;
+		virtual void cellChanged() = 0;
 	
 	private:
 

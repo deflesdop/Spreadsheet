@@ -45,13 +45,13 @@ class Sheet{
 
 	Sheet();
 
-	~Sheet();
+	~Sheet() = default;
 
 	void addObserver(SheetObserver* sheetobs);
 
 	void removeObserver(SheetObserver* sheetobs);
 
-	void notify(const Cell &cell);
+	void notify();
 
 	Column& getColumn(int column);
 

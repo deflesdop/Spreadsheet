@@ -59,7 +59,6 @@ class CellValue : public CellValueBase
 			temp = -99.f;
 			return temp;
 		}
-		//return 0.f;
 	}
 
 };

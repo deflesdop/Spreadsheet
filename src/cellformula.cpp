@@ -2,7 +2,7 @@
  * cellformula.cpp
  *
  *  Created on: Apr 12, 2017
- *      Author: asch
+ *      Author: Andrew Huang, Micha de Jong
  */
 
 #include "../include/cellformula.h"
@@ -149,7 +149,7 @@ void CellFormula::correctCell(){
 
 std::string CellFormula::parseFormula(std::string formula, std::string &cell1, std::string &cell2){
 	std::string delimiter = "=():";
-	std::vector<std::string> v ; //Use vector to add the words
+	std::vector<std::string> v ; 
 
 	std::size_t prev_pos = 0, pos;
 	while ((pos = formula.find_first_of(delimiter, prev_pos)) != std::string::npos){
@@ -201,25 +201,3 @@ void CellFormula::calculateFormula(){
 		iterate(begin, end);
 	}
 }
-
-bool CellFormula::recalculateNeeded(const Cell &cell){
-	int beginY = begin.getRowNum(), endY = end.getRowNum(), i(0);
-	int beginX = begin.getColNum(), endX = end.getColNum(), j(0);
-
-	for(Sheet::iterator sit = sheetref.begin(); sit != sheetref.end(); ++sit){
-		for(Column::iterator cit = sit->begin(); cit != sit->end(); ++cit){
-			if((i >= beginY && i <= endY)&&(j >= beginX && j <= endX)){
-				if((i >= beginY && i < endY)&&(j >= beginX && j < endX)){
-					if(*cit == cell)
-						return true;
-					}
-				j++;
-			}
-		}
-		j = 0;
-		i++;
-			}
-	return false;
-}
-
-

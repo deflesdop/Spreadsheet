@@ -11,13 +11,6 @@ using namespace std;
 	Cell::Cell():
 	 value(nullptr)
 	{}
-		
-//	/*
-//	 * Cell destructor.
-//	 */
-//	Cell::~Cell(){
-//
-//	}
 
 	/*
 	 *Stores a new value in a cell.

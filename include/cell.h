@@ -65,15 +65,6 @@ class Cell {
 		void empty();
 		
 		bool isEmpty();
-
-		bool isEqual(Cell &cell);
-
-		bool operator==(const Cell &x){
-			if(value == x.value)
-				return true;
-			else
-				return false;
-		}
 };
 
 #endif

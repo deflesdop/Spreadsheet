@@ -2,7 +2,7 @@
  * celladdress.h
  *
  *  Created on: Apr 6, 2017
- *      Author: asch
+ *      Author: Andrew Huang, Micha de Jong
  */
 
 #ifndef INCLUDE_CELLADDRESS_H_

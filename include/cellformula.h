@@ -2,7 +2,7 @@
  * cellformula.h
  *
  *  Created on: Apr 5, 2017
- *      Author: asch
+ *      Author: Andrew Huang, Micha de Jong
  */
 
 #ifndef INCLUDE_CELLFORMULA_H_
@@ -38,10 +38,8 @@ public:
 	
 	void calculateFormula();
 
-	virtual void cellChanged(const Cell &cell){
-		//if(recalculateNeeded(cell)){
-			iterate(begin, end);
-		//}
+	virtual void cellChanged(){
+		iterate(begin, end);
 	}
 
 private:
@@ -73,9 +71,6 @@ private:
 	void setIterMode(CellAddress c1, CellAddress c2);
 
 	void iterate(CellAddress c1, CellAddress c2);
-
-	bool recalculateNeeded(const Cell &cell);
-
 
 };
 

@@ -77,7 +77,7 @@ void SheetView::initHeader(){
 			}
 		}
 	}
-	wattr_set(win, old_attr, old_pair, NULL); /* Oude settings terugzetten */
+	wattr_set(win, old_attr, old_pair, NULL);
 }
 
 std::string SheetView::formatCell(std::string value, const size_t size){
@@ -168,7 +168,7 @@ void SheetView::drawCursor(Sheet &sheet){
 			wmove(win,row,CellSize*col+i);
 		}
 	}
-	wattr_set(win, old_attr, old_pair, NULL); /* Oude settings terugzetten */
+	wattr_set(win, old_attr, old_pair, NULL);
 	wmove(win, cursor.getRowNum()+1, (cursor.getColNum()*CellSize)+8);
 }
 
@@ -220,7 +220,7 @@ WINDOW* SheetView::getWin(){
 }
 
 void SheetView::exitSheet(){
-	delwin(win);  /* Dealloceer venster */
-	endwin();  /* Curses stoppen */
+	delwin(win); 
+	endwin();
 }
 
