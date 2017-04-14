@@ -42,7 +42,7 @@ void Sheet::setCellValue(CellValueBase* base, int row, int column){
 }
 
 void Sheet::notify(const Cell &cell){
-	size_t size = observer.size();
+	int size = observer.size();
 	for(int i = 0; i < size; i++){
 		observer[i]->cellChanged(cell);
 	}

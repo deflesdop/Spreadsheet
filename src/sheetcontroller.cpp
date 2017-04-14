@@ -102,6 +102,7 @@ void SheetController::parseCell(WINDOW* win, CellAddress cursor, Sheet &sheet){
 		CellFormula formula(str,sheet);
 		formula.calculateFormula();
 		str = formula.getString();
+		str.resize(8);
 		mvwaddstr(win, cursor.getRowNum()+1, cursor.getColNum()*maxCellSize+8, str.c_str());
 	}
 }
@@ -113,10 +114,6 @@ void SheetController::run(Sheet &sheet){
 
 	int command;
 	do{
-		//wclear(view.getWin());
-
-		//view.drawSheet(sheet);
-
 		view.undoCursor(sheet);
 		parseCell(view.getWin(), view.getCursor(), sheet);
 		wrefresh(view.getWin());

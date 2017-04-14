@@ -19,6 +19,15 @@ CellFormula::CellFormula(std::string formula, Sheet &sheetref):
 	rawFormula(formula), sheetref(sheetref), sum(0), count(0), avg(0)
 {}
 
+void CellFormula::correctCell(){
+	if((begin.getColNum() > end.getColNum())
+			|| (begin.getRowNum() > end.getRowNum())){
+		CellAddress temp = begin;
+		begin = end;
+		end = temp;
+	}
+}
+
 bool CellFormula::validateFormula(std::string formula){
 	int check1(0), check2(0), check3(0), check4(0);
 	for(char c : formula){
@@ -201,6 +210,7 @@ std::string CellFormula::parseFormula(std::string formula, std::string &cell1, s
 		setMode(parseFormula(rawFormula, s1, s2));
 		createCellAddress(s1,s2);
 		setIterMode(begin, end);
+		correctCell();
 		if(errmsg != "ERR"){
 			iterate(begin, end);
 		}

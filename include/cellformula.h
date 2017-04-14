@@ -23,9 +23,7 @@ public:
 	CellFormula(std::string formula, Sheet &sheetref);
 	~CellFormula() = default;
 	
-	bool validateFormula(std::string formula);
 
-	std::string parseFormula(std::string formula, std::string &cell1, std::string &cell2);
 	/*
 	 *Returns the string of the cell used for drawing
 	 *the spreadsheet.
@@ -48,6 +46,12 @@ private:
 	float sum, count, avg;
 	std::string errmsg, str1, str2;
 	CellAddress begin, end;
+
+	void correctCell();
+
+	bool validateFormula(std::string formula);
+
+	std::string parseFormula(std::string formula, std::string &cell1, std::string &cell2);
 
 	void setMode(std::string str);
 
