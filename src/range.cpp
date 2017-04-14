@@ -11,11 +11,11 @@ Range::Range(Sheet &sheet, CellAddress begin, CellAddress end):
 {}
 
 RangeIterator Range::begin(){
-	return RangeIterator(sheetref,beginAddress.getColNum(),beginAddress.getRowNum(),endAddress.getColNum(),endAddress.getRowNum());
+	return RangeIterator(sheetref,beginAddress.getRowNum(),beginAddress.getColNum(),endAddress.getRowNum(),endAddress.getColNum());
 }
 
 RangeIterator Range::end(){
-	return RangeIterator(sheetref,endAddress.getColNum(),endAddress.getRowNum(),endAddress.getColNum(),endAddress.getRowNum());
+	return RangeIterator(sheetref,endAddress.getRowNum(),endAddress.getColNum(),endAddress.getRowNum(),endAddress.getColNum());
 }
 
 Range* Range::makeRangeIt(Sheet sheet, CellAddress begin, CellAddress end){
@@ -32,12 +32,9 @@ Range* Range::makeRangeRef(Sheet sheet, std::string ref){
 	try{
 		begin.createFromReference(add1);
 		end.createFromReference(add2);
+		return new Range(sheet, begin, end);
 	}
 	catch(const char* msg){
-		std::cerr << msg << std::endl;
 		return nullptr;
 	}
-
-	return new Range(sheet, begin, end);
-
 }

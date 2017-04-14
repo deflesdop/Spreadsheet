@@ -9,11 +9,20 @@
 #include "../include/cellvaluebase.h"
 #include "../include/sheetobserver.h"
 #include <string>
+#include <curses.h>
 
 
 Sheet::Sheet():
 sheet(maxColumnNumber)
 {}
+
+Sheet::~Sheet(){
+//	std::vector<SheetObserver*>::iterator it = observer.begin();
+//	while (it != observer.end() && *it != nullptr){
+//		delete *it;
+//		it = observer.erase(it);
+//	}
+}
 
 void Sheet::addObserver(SheetObserver* sheetobs){
 	observer.push_back(sheetobs);
@@ -27,22 +36,15 @@ Cell& Sheet::getCell(int row, int column){
 	return getColumn(column).getCell(row);
 }
 
-void Sheet::setFloat(const float val, int row, int column){
-	getCell(row, column).setFloat(val);
-}
-	
-void Sheet::setString(const std::string val, int row, int column){
-	getCell(row, column).setString(val);
-}
-	
 void Sheet::setCellValue(CellValueBase* base, int row, int column){
 	getCell(row, column).setCellValue(base);
+	notify(getCell(row,column));
 }
 
-void Sheet::notify(){
-	int size = observer.size();
+void Sheet::notify(const Cell &cell){
+	size_t size = observer.size();
 	for(int i = 0; i < size; i++){
-		observer[i]->cellChanged();
+		observer[i]->cellChanged(cell);
 	}
 }
 /*

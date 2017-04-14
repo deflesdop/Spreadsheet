@@ -23,6 +23,8 @@ public:
 	CellFormula(std::string formula, Sheet &sheetref);
 	~CellFormula() = default;
 	
+	bool validateFormula(std::string formula);
+
 	std::string parseFormula(std::string formula, std::string &cell1, std::string &cell2);
 	/*
 	 *Returns the string of the cell used for drawing
@@ -30,23 +32,39 @@ public:
 	 */
 	string getString();
 
-
 	/*
 	 * Returns the value of the cell as float.
 	 */
 	float getFloat();
 	
 	void calculateFormula();
-	
-	void cellChanged();
-	
+
+	void cellChanged(const Cell &cell);
 
 private:
+	int mode, iterMode;
 	std::string rawFormula;
 	Sheet &sheetref;
 	float sum, count, avg;
-	std::string cell1, cell2;
-	
+	std::string errmsg, str1, str2;
+	CellAddress begin, end;
+
+	void setMode(std::string str);
+
+	void createCellAddress(std::string str1, std::string str2);
+
+	void iterateHori(CellAddress c1, CellAddress c2);
+
+	void iterateVert(CellAddress c1, CellAddress c2);
+
+	void iterateBlock(CellAddress c1, CellAddress c2);
+
+	void setIterMode(CellAddress c1, CellAddress c2);
+
+	void iterate(CellAddress c1, CellAddress c2);
+
+	bool recalculateNeeded(const Cell &cell);
+
 
 };
 

@@ -12,6 +12,7 @@ class SheetView{
 
 		void initHeader();
 		void drawSheet(Sheet &sheet);
+		void undoCursor(Sheet &sheet);
 		void drawCursor(Sheet &sheet);
 		CellAddress getCursor();
 		void setCursor(int row, int col); 

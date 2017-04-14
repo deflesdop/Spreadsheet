@@ -13,14 +13,6 @@
 class RangeIterator;
 class Range{
 
-
-	private:
-
-		Sheet& sheetref;
-		CellAddress beginAddress, endAddress;
-		const char delim = ':';
-
-
 	public:
 
 		Range(Sheet &sheet, CellAddress begin, CellAddress end);
@@ -37,6 +29,13 @@ class Range{
 
 		CellAddress setCellAddress();
 
+	private:
+
+		Sheet& sheetref;
+
+		CellAddress beginAddress, endAddress;
+
+		const char delim = ':';
 
 
 
@@ -55,7 +54,7 @@ class RangeIterator : public std::iterator<std::input_iterator_tag, int>
 
 		bool operator==(const RangeIterator &iter) const
 			{
-			  return &iter.sheet == &sheet && iter.offsetX == offsetX && iter.offsetY == offsetY;
+			  return &iter.sheet == &sheet && iter.offsetX == offsetX && iter.offsetY == offsetY  && iter.endX == endX && iter.endY == endY;
 			}
 
 		bool operator!=(const RangeIterator &iter) const

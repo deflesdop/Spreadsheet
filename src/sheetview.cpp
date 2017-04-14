@@ -105,7 +105,33 @@ void SheetView::drawSheet(Sheet &sheet){
 	wmove(win, cursor.getRowNum()+1, (cursor.getColNum()*CellSize)+8);
 }
 
+void SheetView::undoCursor(Sheet &sheet){
+	int row = cursor.getRowNum()+1;
+	int col = cursor.getColNum()+1;
+	int size = 8;
+
+	wmove(win,row,CellSize*col);
+	if(!sheet.getCell(row-1,col-1).isEmpty()){
+		if(sheet.getCell(row-1, col-1).getString().size() > 8){
+			waddstr(win, formatCell(sheet.getCell(row-1, col-1).getString(), 8).c_str());
+		}
+		else{
+			size -= sheet.getCell(row-1, col-1).getString().size();
+			waddstr(win, sheet.getCell(row-1, col-1).getString().c_str());
+			for(int i = 0; i < size; i++)
+				waddch(win, ' ');
+		}
+	}
+	else{
+		for(int i = 1; i <= CellSize; i++){
+			waddch(win, ' ');
+			wmove(win,row,CellSize*col+i);
+		}
+	}
+}
+
 void SheetView::drawCursor(Sheet &sheet){
+
 	int row = cursor.getRowNum()+1;
 	int col = cursor.getColNum()+1;
 	int size = 8;

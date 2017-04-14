@@ -9,12 +9,11 @@ class SheetObserver{
 	
 		SheetObserver(Sheet &sheet){
 			sheet.addObserver(this);
-
 		}
 		
 		
 		virtual ~SheetObserver() = default;
-		virtual void cellChanged() = 0;
+		virtual void cellChanged(const Cell &cell) = 0;
 	
 	private:
 

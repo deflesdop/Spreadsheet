@@ -66,6 +66,10 @@ class Cell {
 		
 		bool isEmpty();
 
+		 bool operator==(const Cell &b){
+		      return this->value == b.value;
+		    }
+
 
 };
 

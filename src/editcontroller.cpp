@@ -1,9 +1,11 @@
-#include "../include/sheetview.h"
+
 #include <curses.h>
 #include <string>
 #include "../include/sheet.h"
+#include "../include/sheetview.h"
 #include "../include/editcontroller.h"
 #include "../include/cellvaluebase.h"
+#include "../include/cellformula.h"
 
 EditController::EditController(){
 	xIndex = 1;
@@ -66,7 +68,6 @@ void EditController::editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor){
 	CellValueBase* base;
 	std::string str;
 	chtype t;
-
 	wmove(popup,yIndex,xIndex);
 
 	while((command = wgetch(popup)) != '\n'){
@@ -74,11 +75,11 @@ void EditController::editCell(WINDOW* popup, Sheet &sheet, CellAddress cursor){
 		wrefresh(popup);
 
 	}
-
 	for(int i = 0; i < maxEditSize-1; i++){
 		t = mvwinch(popup,1,1+i);
 		str+=t;
 	}
+
 	base = CellValueBase::cellValueFactory(str);
-	sheet.getCell(cursor.getRowNum(), cursor.getColNum()).setCellValue(base);
+	sheet.setCellValue(base, cursor.getRowNum(), cursor.getColNum());
 }

@@ -45,21 +45,17 @@ class Sheet{
 
 	Sheet();
 
-	~Sheet() = default;
+	~Sheet();
 
 	Column& getColumn(int column);
 
 	Cell& getCell(const int row, const int column);
 	
-	void setFloat(const float val, int row, int column);
-	
-	void setString(const std::string val, int row, int column);
-	
 	void setCellValue(CellValueBase* base, int row, int column);
 	
 	void addObserver(SheetObserver* sheetobs);
 
-	void notify();
+	void notify(const Cell &cell);
 
 	typedef SheetIterator iterator;
 

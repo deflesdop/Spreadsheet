@@ -14,7 +14,7 @@ EditWindow::EditWindow(CellAddress loc){
 }
 
 void EditWindow::drawWindow(const char* str){
-	wborder(popup, 0, 0, 0, 0, 0, 0, 0, 0);
+	//wborder(popup, 0, 0, 0, 0, 0, 0, 0, 0);
 	mvwaddstr(popup, 1, 1, str);
 	wrefresh(popup);
 	

@@ -5,6 +5,7 @@
 #include "../include/sheetcontroller.h"
 #include "../include/editwindow.h"
 #include "../include/editcontroller.h"
+#include "../include/cellformula.h"
 
 SheetController::SheetController(){
 	row = 0, col = 0;
@@ -92,25 +93,37 @@ void SheetController::handleInput(WINDOW* win, CellAddress cursor, Sheet &sheet,
 	}
 }
 
-//TODO Implement need CellFormula class
-void SheetController::parseCell(CellAddress cursor, Sheet &sheet){
 
+void SheetController::parseCell(WINDOW* win, CellAddress cursor, Sheet &sheet){
+	std::string str;
+	if(!sheet.getCell(cursor.getRowNum(),cursor.getColNum()).isEmpty())
+		str = sheet.getCell(cursor.getRowNum(),cursor.getColNum()).getString();
+	if(str.front() == '='){
+		CellFormula formula(str,sheet);
+		formula.calculateFormula();
+		str = formula.getString();
+		mvwaddstr(win, cursor.getRowNum()+1, cursor.getColNum()*maxCellSize+8, str.c_str());
+	}
 }
 
 void SheetController::run(Sheet &sheet){
 	SheetView view;
+	view.initHeader();
 	wmove(view.getWin(), 1,8);
 
 	int command;
 	do{
-		wclear(view.getWin());
-		view.initHeader();
-		view.drawSheet(sheet);
+		//wclear(view.getWin());
+
+		//view.drawSheet(sheet);
+
+		view.undoCursor(sheet);
+		parseCell(view.getWin(), view.getCursor(), sheet);
 		wrefresh(view.getWin());
 		handleInput(view.getWin(), view.getCursor(), sheet, command);
 		view.setCursor(row,col);
 		view.drawCursor(sheet);
-		
+
 
 		wrefresh(view.getWin());
 
