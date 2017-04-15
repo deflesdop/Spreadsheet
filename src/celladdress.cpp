@@ -66,16 +66,6 @@ void CellAddress::setColNum(int col){
 	colNum = col;
 }
 
-void CellAddress::incDecRowCursor(bool inc)
-	(inc ? rowNum++ : rowNum--);
-	std::cout << rowNum << "," << colNum<<std::endl;
-}
-
-void CellAddress::incDecColCursor(bool inc){
-	(inc ? colNum++ : colNum--);
-	std::cout << rowNum << "," << colNum<<std::endl;
-}
-
 
 
 /*

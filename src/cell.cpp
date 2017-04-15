@@ -58,7 +58,3 @@ using namespace std;
 	bool Cell::isEmpty(){
 		return (value == nullptr);
 	}
-
-	bool Cell::isEqual(Cell &cell){
-		return (this->value == cell.value);
-	}
